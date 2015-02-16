@@ -1,0 +1,37 @@
+<!-- Main layout html fil that contains repeated elements like <head> and <footer> so we don't have to repear this markup on every single page like index.html, about.html-->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> {{ page.title }}</title>
+		<link rel="stylesheet" type="text/css" href="/css/main.css">
+	</head>
+	<body>
+		<nav>
+    		<ul>
+        		<li><a href="/">Home</a></li>
+	        	<li><a href="/about">About</a></li>
+        		<li><a href="/cv">CV</a></li>
+        		<li><a href="/blog">Blog</a></li>
+    		</ul>
+		</nav>
+		<div class="container">
+
+			<!-- This is a liquid tags by jekyll, used to inject content into the final webpage -->
+
+			{{ content }} 
+
+        		<h1>Who Am I? Who Am I? My Name is Nischay Mohan!</h1>
+				<p>Something<em>About</em>Meself<a href="/about">Read more about my life...</a></p>
+
+		</div><!-- /.container -->
+		<footer>
+    		<ul>
+        		<li><a href="mailto:spectralnischay@hotmail.com">email</a></li>
+        		<li><a href="https://github.com/revision24601">github.com/Revision24601</a></li>
+			</ul>
+		</footer>
+	</body>
+</html>
+
+<!-- Source: http://jmcglone.com/guides/github-pages/ -->

@@ -13,12 +13,23 @@
         		<li><a href="/blog">Blog</a></li>
     		</ul>
 		</nav>
-		<div class="container">
+		<div class="container"> -->
+
+			<!-- This plaintext at teh top is called Front-matter. Any file that containes this will be processed by Jekyll. Every time you commit a file that specifies layout: default at the top, Jekyll will magically generate the full HTML document by replacing {{ content }} in _layouts/default.html with the contents of this commited file.
+
+			Source: http://jmcglone.com/guides/github-pages/
+			-->
+---
+layout: default
+title: Nischay Mohan, Engineer
+---
     		<div class="blurb">
         		<h1>Who Am I? Who Am I? My Name is Nischay Mohan!</h1>
-				<p>Something<em>About</em>Meself<a href="/about">Read more about my life...</a></p>
+				<p>Something <em>About </em>Meself <a href="/about">Read more about my life...</a></p>
     		</div><!-- /.blurb -->
-		</div><!-- /.container -->
+
+
+		<!-- </div>
 		<footer>
     		<ul>
         		<li><a href="mailto:spectralnischay@hotmail.com">email</a></li>
