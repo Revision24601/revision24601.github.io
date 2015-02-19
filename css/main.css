@@ -41,6 +41,7 @@ ul.posts {
 ul.posts li {
     list-style: none;
 }
-blurb {
-    background-color: #000000
+div.blurb {
+    background-color: #a1a1a1
+
 }
