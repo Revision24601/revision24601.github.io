@@ -42,7 +42,9 @@ ul.posts li {
     list-style: none;
 }
 div.blurb {
-    background-color: #a1a1a1
-    position:relative;
-    background:'leshark.png' 
+    /*background-color: #abcdef;*/
+   /* position:relative;
+    background-image:"leshark.png";
+    width:1438px;
+    height: 600px;*/
 }
