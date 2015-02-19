@@ -43,5 +43,6 @@ ul.posts li {
 }
 div.blurb {
     background-color: #a1a1a1
-
+    position:relative;
+    background:'leshark.png' 
 }
