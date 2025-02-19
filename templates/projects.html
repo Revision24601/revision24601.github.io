@@ -1,16 +1,11 @@
----
-layout: default
-title: Nischay Mohan, Engineer
----
-<html>
-  <head>
-    <title> {{ page.title }}</title>
-    <link rel="stylesheet" type="text/css" href="/_site/css/projects.css">
-  </head>
-  <body>
-    <p>le projects</p>
-      <div style="position: relative; background:url(/munich.JPG); width: 250px; height: 250px;">
+{% extends "base.html" %}
+
+{% block title %}Projects - Nischay Mohan{% endblock %}
+
+{% block content %}
+    <h1>le projects</h1>
+
+    <div style="position: relative; background:url('{{ url_for('static', filename='images/munich.JPG') }}'); width: 250px; height: 250px;">
         <a href="#">Link</a>
     </div>
-  </body>
-</html>
+{% endblock %}
