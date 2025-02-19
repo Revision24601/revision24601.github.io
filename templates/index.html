@@ -1,10 +1,63 @@
 {% extends "base.html" %}
 
+{% block title %}Nischay Mohan - Software Engineer{% endblock %}
+
 {% block content %}
-<div class="blurb" style="position: relative; background:url('{{ url_for('static', filename='images/leshark.png') }}'); width: 1438px; height: 600px;">
-    <div style="position: absolute; bottom: 300px; top: 300px; width: 400px;">
-        <h1>Who Am I? Who Am I? My Name is Nischay Mohan!</h1>
-        <p>Something <em>About </em>Meself <a href="{{ url_for('projects') }}">Read more about my life...</a></p>
+
+<!-- Hero Section with Animated Heading -->
+<header class="hero">
+    <div class="hero-content">
+        <h1 class="fade-in">Hi, I'm <span class="highlight">Nischay Mohan</span></h1>
+        <h2 class="fade-in-delay">Software Development Manager | AWS | Event-Driven Architect</h2>
+        <p class="fade-in-late">Passionate about building scalable cloud solutions and empowering engineering teams.</p>
+        <div class="buttons">
+            <a href="https://linkedin.com/in/nischaymohan" class="btn">LinkedIn</a>
+            <a href="https://github.com/Revision24601" class="btn">GitHub</a>
+            <a href="{{ url_for('static', filename='resume.pdf') }}" class="btn btn-alt">View Resume</a>
+        </div>
     </div>
-</div>
+</header>
+
+<!-- Animated About Section -->
+<section class="about">
+    <h2>About Me</h2>
+    <p>I am a Software Development Manager at AWS, specializing in event-driven architectures, cloud computing, and AI-driven solutions. My expertise lies in leading engineering teams to build scalable, high-performance applications.</p>
+</section>
+
+<!-- Cool Skills Section -->
+<section class="skills">
+    <h2>My Tech Stack</h2>
+    <div class="skills-grid">
+        <div class="skill">☁ Cloud Computing (AWS, Azure)</div>
+        <div class="skill">⚡ Event-Driven Architectures</div>
+        <div class="skill">🤖 AI & Generative AI</div>
+        <div class="skill">🚀 Serverless Development</div>
+        <div class="skill">🐍 Python, Java, C++</div>
+        <div class="skill">🎯 Software Engineering Leadership</div>
+    </div>
+</section>
+
+<!-- Snazzy Projects Section -->
+<section class="projects">
+    <h2>Featured Projects</h2>
+    <div class="project-list">
+        <div class="project">
+            <img src="{{ url_for('static', filename='images/munich.JPG') }}" alt="Project Image">
+            <h3>AI-Powered Cloud Monitoring</h3>
+            <p>Built an intelligent cloud monitoring system using AWS Lambda, DynamoDB, and AI anomaly detection.</p>
+            <a href="/projects" class="btn">View Details</a>
+        </div>
+        <div class="project">
+            <img src="{{ url_for('static', filename='images/leshark.png') }}" alt="Project Image">
+            <h3>Real-Time EventBridge Analytics</h3>
+            <p>Developed a real-time analytics dashboard for AWS EventBridge using React & Flask.</p>
+            <a href="/projects" class="btn">View Details</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2025 Nischay Mohan | <a href="mailto:nischaym@amazon.com">Contact Me</a></p>
+</footer>
+
 {% endblock %}
