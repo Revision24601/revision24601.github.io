@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer YOUR_OPENAI_API_KEY"
+                "Authorization": "Bearer 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"
             },
             body: JSON.stringify({
                 model: "gpt-3.5-turbo",
