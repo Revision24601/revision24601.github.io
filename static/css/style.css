@@ -15,7 +15,7 @@ body {
     justify-content: center;
     text-align: center;
     color: white;
-    background: url("{{ url_for('static', filename='images/leshark.png') }}") center/cover no-repeat;
+    background: url("/static/images/leshark.png") center/cover no-repeat;
     animation: fadeIn 1.5s ease-in-out;
 }
 
