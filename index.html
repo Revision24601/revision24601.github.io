@@ -1,56 +1,69 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nischay Mohan - Software Engineer</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+    </nav>
 
-{% block content %}
-<header class="hero">
-    <div class="hero-content">
-        <h1 class="fade-in">Hi, I'm <span class="highlight">Nischay Mohan</span></h1>
-        <h2 class="fade-in-delay">Software Development Manager | AWS | Event-Driven Architect</h2>
-        <p class="fade-in-late">Passionate about building scalable cloud solutions and empowering engineering teams.</p>
-        <div class="buttons">
-            <a href="https://linkedin.com/in/nischaymohan" class="btn">LinkedIn</a>
-            <a href="https://github.com/Revision24601" class="btn">GitHub</a>
-            <a href="static/resume.pdf" class="btn btn-alt">View Resume</a>
-        </div>
-    </div>
-</header>
+    <main>
+        <header class="hero">
+            <div class="hero-content">
+                <h1 class="fade-in">Hi, I'm <span class="highlight">Nischay Mohan</span></h1>
+                <h2 class="fade-in-delay">Software Development Manager | AWS | Event-Driven Architect</h2>
+                <p class="fade-in-late">Passionate about building scalable cloud solutions and empowering engineering teams.</p>
+                <div class="buttons">
+                    <a href="https://linkedin.com/in/nischaymohan" class="btn">LinkedIn</a>
+                    <a href="https://github.com/Revision24601" class="btn">GitHub</a>
+                    <a href="static/resume.pdf" class="btn btn-alt">View Resume</a>
+                </div>
+            </div>
+        </header>
 
-<section class="about">
-    <h2>About Me</h2>
-    <p>I am a Software Development Manager at AWS, specializing in event-driven architectures, cloud computing, and AI-driven solutions. My expertise lies in leading engineering teams to build scalable, high-performance applications.</p>
-</section>
+        <section class="about">
+            <h2>About Me</h2>
+            <p>I am a Software Development Manager at AWS, specializing in event-driven architectures, cloud computing, and AI-driven solutions. My expertise lies in leading engineering teams to build scalable, high-performance applications.</p>
+        </section>
 
-<section class="skills">
-    <h2>My Tech Stack</h2>
-    <div class="skills-grid">
-        <div class="skill">☁ Cloud Computing (AWS, Azure)</div>
-        <div class="skill">⚡ Event-Driven Architectures</div>
-        <div class="skill">🤖 AI & Generative AI</div>
-        <div class="skill">🚀 Serverless Development</div>
-        <div class="skill">🐍 Python, Java, C++</div>
-        <div class="skill">🎯 Software Engineering Leadership</div>
-    </div>
-</section>
+        <section class="skills">
+            <h2>My Tech Stack</h2>
+            <div class="skills-grid">
+                <div class="skill">☁ Cloud Computing (AWS, Azure)</div>
+                <div class="skill">⚡ Event-Driven Architectures</div>
+                <div class="skill">🤖 AI & Generative AI</div>
+                <div class="skill">🚀 Serverless Development</div>
+                <div class="skill">🐍 Python, Java, C++</div>
+                <div class="skill">🎯 Software Engineering Leadership</div>
+            </div>
+        </section>
 
-<section class="projects">
-    <h2>Featured Projects</h2>
-    <div class="project-list">
-        <div class="project">
-            <img src="static/images/munich.JPG" alt="Project Image">
-            <h3>AI-Powered Cloud Monitoring</h3>
-            <p>Built an intelligent cloud monitoring system using AWS Lambda, DynamoDB, and AI anomaly detection.</p>
-            <a href="projects.html" class="btn">View Details</a>
-        </div>
-        <div class="project">
-            <img src="static/images/leshark.png" alt="Project Image">
-            <h3>Real-Time EventBridge Analytics</h3>
-            <p>Developed a real-time analytics dashboard for AWS EventBridge using React & Flask.</p>
-            <a href="projects.html" class="btn">View Details</a>
-        </div>
-    </div>
-</section>
+        <section class="projects">
+            <h2>Featured Projects</h2>
+            <div class="project-list">
+                <div class="project">
+                    <img src="static/images/munich.JPG" alt="Project Image">
+                    <h3>AI-Powered Cloud Monitoring</h3>
+                    <p>Built an intelligent cloud monitoring system using AWS Lambda, DynamoDB, and AI anomaly detection.</p>
+                    <a href="projects.html" class="btn">View Details</a>
+                </div>
+                <div class="project">
+                    <img src="static/images/leshark.png" alt="Project Image">
+                    <h3>Real-Time EventBridge Analytics</h3>
+                    <p>Developed a real-time analytics dashboard for AWS EventBridge using React & Flask.</p>
+                    <a href="projects.html" class="btn">View Details</a>
+                </div>
+            </div>
+        </section>
+    </main>
 
-<footer>
-    <p>© 2025 Nischay Mohan | <a href="mailto:nischaym@amazon.com">Contact Me</a></p>
-</footer>
-
-{% endblock %}
+    <footer>
+        <p>© 2025 Nischay Mohan | <a href="mailto:nischaym@amazon.com">Contact Me</a></p>
+    </footer>
+</body>
+</html>
