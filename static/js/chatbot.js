@@ -1,12 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const chatIcon = document.getElementById("chat-icon");
+    const chatContainer = document.getElementById("chat-container");
     const chatBox = document.getElementById("chat-box");
     const userInput = document.getElementById("user-input");
     const sendButton = document.getElementById("send-btn");
 
+    // Toggle Chatbox Visibility
+    chatIcon.addEventListener("click", () => {
+        chatContainer.classList.toggle("active");
+    });
+
     sendButton.addEventListener("click", async () => {
         const userText = userInput.value;
         if (!userText.trim()) return;
-        
+
         chatBox.innerHTML += `<p><strong>You:</strong> ${userText}</p>`;
         userInput.value = "";
 
@@ -19,7 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: JSON.stringify({
                 model: "gpt-3.5-turbo",
-                messages: [{ role: "user", content: userText }]
+                messages: [{ role: "system", content: "You are a friendly AI chatbot that cracks jokes and helps users with tech questions." },
+                           { role: "user", content: userText }]
             })
         });
 
