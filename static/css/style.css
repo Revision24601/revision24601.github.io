@@ -166,3 +166,35 @@ nav a:hover {
     background: #ff5733;
     transform: scale(1.1);
 }
+
+#chat-container {
+    width: 300px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#chat-box {
+    height: 200px;
+    overflow-y: scroll;
+    padding: 5px;
+}
+
+#user-input {
+    width: 80%;
+    padding: 5px;
+}
+
+#send-btn {
+    width: 15%;
+    padding: 5px;
+    background: #ff5733;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
