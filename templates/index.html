@@ -1,10 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Nischay Mohan - Software Engineer{% endblock %}
-
 {% block content %}
-
-<!-- Hero Section with Animated Heading -->
 <header class="hero">
     <div class="hero-content">
         <h1 class="fade-in">Hi, I'm <span class="highlight">Nischay Mohan</span></h1>
@@ -13,18 +9,16 @@
         <div class="buttons">
             <a href="https://linkedin.com/in/nischaymohan" class="btn">LinkedIn</a>
             <a href="https://github.com/Revision24601" class="btn">GitHub</a>
-            <a href="/static/resume.pdf" class="btn btn-alt">View Resume</a>
+            <a href="static/resume.pdf" class="btn btn-alt">View Resume</a>
         </div>
     </div>
 </header>
 
-<!-- Animated About Section -->
 <section class="about">
     <h2>About Me</h2>
     <p>I am a Software Development Manager at AWS, specializing in event-driven architectures, cloud computing, and AI-driven solutions. My expertise lies in leading engineering teams to build scalable, high-performance applications.</p>
 </section>
 
-<!-- Cool Skills Section -->
 <section class="skills">
     <h2>My Tech Stack</h2>
     <div class="skills-grid">
@@ -37,21 +31,20 @@
     </div>
 </section>
 
-<!-- Snazzy Projects Section -->
 <section class="projects">
     <h2>Featured Projects</h2>
     <div class="project-list">
         <div class="project">
-            <img src="/static/images/munich.JPG" alt="Project Image">
+            <img src="static/images/munich.JPG" alt="Project Image">
             <h3>AI-Powered Cloud Monitoring</h3>
             <p>Built an intelligent cloud monitoring system using AWS Lambda, DynamoDB, and AI anomaly detection.</p>
-            <a href="/projects" class="btn">View Details</a>
+            <a href="projects.html" class="btn">View Details</a>
         </div>
         <div class="project">
-            <img src="/static/images/leshark.png" alt="Project Image">
+            <img src="static/images/leshark.png" alt="Project Image">
             <h3>Real-Time EventBridge Analytics</h3>
             <p>Developed a real-time analytics dashboard for AWS EventBridge using React & Flask.</p>
-            <a href="/projects" class="btn">View Details</a>
+            <a href="projects.html" class="btn">View Details</a>
         </div>
     </div>
 </section>
