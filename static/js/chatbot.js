@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: JSON.stringify({
                 model: "gpt-3.5-turbo",
-                messages: [{ role: "system", content: "You are a friendly AI chatbot that cracks jokes and helps users with tech questions." },
+                messages: [{ role: "system", content: "You are a helpful and witty AI chatbot." },
                            { role: "user", content: userText }]
             })
         });
