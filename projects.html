@@ -5,21 +5,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Nischay Mohan</title>
     <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/projects.css">
 </head>
 <body>
+    <!-- Navigation Bar -->
     <nav>
-        <a href="index.html">Home</a>
-        <a href="projects.html">Projects</a>
+        <a href="index.html">🏠 Home</a>
+        <a href="projects.html">📂 Projects</a>
     </nav>
 
     <main>
-        <h1>le projects</h1>
-        <img src="static/images/munich.JPG" width="250" height="250">
-        <a href="#">Link</a>
+        <header class="projects-header">
+            <h1 class="fade-in">My <span class="highlight">Projects</span></h1>
+            <p class="fade-in-delay">Explore my work in cloud computing, event-driven architecture, and AI solutions.</p>
+        </header>
+
+        <!-- Project Filters -->
+        <div class="filter-container fade-in-late">
+            <div class="filter-label">Filter by:</div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="cloud">Cloud</button>
+                <button class="filter-btn" data-filter="ai">AI</button>
+                <button class="filter-btn" data-filter="event-driven">Event-Driven</button>
+            </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card" data-category="cloud ai">
+                <div class="project-image">
+                    <img src="static/images/munich.JPG" alt="AI-Powered Cloud Monitoring">
+                </div>
+                <div class="project-info">
+                    <h3>AI-Powered Cloud Monitoring</h3>
+                    <p class="project-tags">
+                        <span class="tag">AWS</span>
+                        <span class="tag">Lambda</span>
+                        <span class="tag">AI</span>
+                    </p>
+                    <p class="project-description">Built an intelligent cloud monitoring system using AWS Lambda, DynamoDB, and AI anomaly detection.</p>
+                    <button class="view-details-btn" data-project="project1">View Details</button>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card" data-category="event-driven cloud">
+                <div class="project-image">
+                    <img src="static/images/leshark.png" alt="Real-Time EventBridge Analytics">
+                </div>
+                <div class="project-info">
+                    <h3>Real-Time EventBridge Analytics</h3>
+                    <p class="project-tags">
+                        <span class="tag">EventBridge</span>
+                        <span class="tag">React</span>
+                        <span class="tag">Flask</span>
+                    </p>
+                    <p class="project-description">Developed a real-time analytics dashboard for AWS EventBridge using React & Flask.</p>
+                    <button class="view-details-btn" data-project="project2">View Details</button>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card" data-category="ai">
+                <div class="project-image">
+                    <img src="static/images/munich.JPG" alt="Generative AI Content Platform">
+                </div>
+                <div class="project-info">
+                    <h3>Generative AI Content Platform</h3>
+                    <p class="project-tags">
+                        <span class="tag">GPT-4</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">React</span>
+                    </p>
+                    <p class="project-description">Created a platform for generating and managing AI-created content with customizable templates.</p>
+                    <button class="view-details-btn" data-project="project3">View Details</button>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card" data-category="cloud event-driven">
+                <div class="project-image">
+                    <img src="static/images/leshark.png" alt="Serverless Data Pipeline">
+                </div>
+                <div class="project-info">
+                    <h3>Serverless Data Pipeline</h3>
+                    <p class="project-tags">
+                        <span class="tag">AWS</span>
+                        <span class="tag">Kinesis</span>
+                        <span class="tag">Lambda</span>
+                    </p>
+                    <p class="project-description">Built a scalable data processing pipeline using AWS Kinesis, Lambda, and S3 for real-time analytics.</p>
+                    <button class="view-details-btn" data-project="project4">View Details</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Details Modal -->
+        <div id="project-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div id="modal-content"></div>
+            </div>
+        </div>
     </main>
 
+    <!-- Floating Chatbot Icon -->
+    <div id="chat-icon">
+        💬
+    </div>
+
+    <!-- Chatbot Pop-up -->
+    <div id="chat-container">
+        <div id="chat-header">
+            <span>🤖 Chat with AI</span>
+            <button id="close-chat">✖</button>
+        </div>
+        <div id="chat-box"></div>
+        <input type="text" id="user-input" placeholder="Ask me anything...">
+        <button id="send-btn">Send</button>
+    </div>
+
+    <!-- Footer -->
     <footer>
         <p>© 2025 Nischay Mohan | <a href="mailto:nischaym@amazon.com">Contact Me</a></p>
     </footer>
+
+    <!-- JavaScript -->
+    <script src="static/js/chatbot.js"></script>
+    <script src="static/js/projects.js"></script>
 </body>
 </html>
