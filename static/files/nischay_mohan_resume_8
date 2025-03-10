@@ -1,0 +1,80 @@
+
+930 Seymour Street	Nischay Mohan	                       +1 (647) 919-5580
+Vancouver, BC V6B 1B4		   spectralnischay@hotmail.com
+		                          LinkedIn
+
+ 
+EXECUTIVE SUMMARY 
+
+Dynamic and results-driven software engineering leader with over 10+ years of experience in building and scaling high-performing engineering teams. Proven ability to drive innovation, optimize cloud-based infrastructure, and deliver AI-driven automation solutions. Adept at refining ambiguous requirements, defining system architecture, and fostering cross-functional collaboration to build customer-centric products. Experienced in hiring, mentoring, and developing engineers, ensuring excellence in execution and operational rigor. Passionate about leveraging technology to transform industries, with a track record of delivering scalable, event-driven solutions in high-growth environments.
+
+TOP ACHIEVEMENTS
+•	Led the Delivery of Customer-Managed Key Encryption (CMKMS) for Event Buses
+o	Spearheaded CMK encryption implementation, strengthening security, compliance, and risk management for highly sensitive event-driven architectures. Integrated encryption-at-rest and in-transit security using AWS Key Management Service (KMS) to protect billions of compute events across cloud workloads
+•	Transformed Infrastructure Efficiency & Cut Costs by 76%
+o	Led cost optimization initiatives by migrating log storage and refactoring AWS infrastructure, reducing cloud storage usage by 91% and cutting operational costs from $39.08 to $9.22 per billion events. Optimized serverless architectures with S3 and CI/CD pipelines, increasing scalability and financial efficiency
+•	Pioneered AI-driven automation initiatives in event-driven and scheduling systems 
+o	Pioneered AI-driven automation within AWS Events and Scheduling Org, leading proof-of-concept development of a Generative AI-powered rule-matching system and an AI chatbot for internal users. The chatbot, built using AWS SageMaker and Bedrock, streamlines onboarding and FAQs through conversational AI, while the rule-matching system enables customers to leverage AI prompts for event-rule associations and target invocations, enhancing event-driven automation
+•	Reduced Deployment Times by 65% & Software Issues by 66% via DevOps & Agile Practices
+o	Championed CI/CD automation, Infrastructure as Code (IaC), and Continuous Deployment pipelines across multiple engineering teams. Implemented automated testing, monitoring, and observability tooling to improve software reliability and accelerate feature releases
+•	Revamped Job Scheduling and launched Serverless Distributed Job Scheduling
+o	Led the transition of AWS's Distributed Job Scheduler (DJS) team, relocating it from Romania to Vancouver, and delivered the first feature update in five years—DJS Serverless. This release enabled customers to schedule jobs using AWS Lambda & Fargate, improving developer velocity and reducing infrastructure overhead.
+•	Accelerated Service Expansion by Reducing Region Build Timelines by 99.4%
+o	 Implemented automation-driven service onboarding strategies that reduced region deployment timelines from multiple months to just a few hours, accelerating AWS cloud growth and global expansion
+•	Amazon Interview Bar-Raiser (In Training) with 110+ Interviews
+o	Contributed to the hiring and growth of AWS engineering teams by leading technical interviews, resulting in a 43% increase in organizational headcount
+
+WORK EXPERIENCE
+ 
+Software Development Manager                     Amazon Web Services, Vancouver, Canada	                         May 2021 – Feb 2025
+Software Development Manager, AWS EventBridge   		             Dec 2023 – Feb 2025
+•	Led a team of 7 engineers on the EventBridge Enrichment team, responsible for the comprehensive engineering, infrastructure and operational management of the team. The EventBridge Enrichment team owns the core service responsible for rule matching of ingested events into an event and invoke target delivery
+•	Collaborated with Product Management, Technical Program Manager, UI/UX, and Security teams to coordinate and manage feature delivery, facilitate AWS growth, improve speed with automation, and enhance security. Worked with Senior Product Management team on product design and delivered 3 roadmaps (short-term and long-term).
+•	Grew the team to full headcount of 7 engineers within 9 months. Within the same period, I successfully promoted 1 SDE1 to SDE2 and 1 SDE2 to Senior SDE. Notably, this includes the first Senior SDE promotion in the EventBridge organization in 2 years. Finally, I supervised an intern who developed a JSONata-based event transformation system and will return as a full-time SDE in Q2 2025.
+•	Facilitated AWS Growth by prioritizing and coordinating successful expansion of EventBridge into 6+ regions
+•	Features delivered: Led a team of 7 engineers to deliver Customer-Managed Key Encryption for Event Buses (Public What’s New Post), which provides customers with ability to encrypt event traffic through at-rest and in-transit datastores with customer-managed keys. Organized weekly dive deep meetings with key stakeholders, including Senior Management, Principal Engineers, Senior Product Management and Technical Program Managers to relay project status, capacity baseline, monitor milestone progress and manage risks by highlighting PI (Probability-Impact) analysis and mitigation strategies. Collaborated with Application Security and a Senior Engineer to accurately document service architecture and key design changes, facilitating security sign-off of the project and timely delivery
+•	Achieved a 76% reduction in EventBridge infrastructure costs by migrating log storage to a more affordable solution, reducing usage by 91% from ~30 GB/5min to 3MB/5min, lowering overall costs from $39.08 to $9.22 per billion events in January 2025. Established bi-weekly Project Tracker reviews, ensuring team leads showcased progress, identified risks, and proposed mitigation strategies
+
+Software Development Manager, Distributed Job Scheduler (DJS)                                                                                    May 2021 – Dec 2023
+•	Led a team of 7 engineers on Distributed Job Scheduling (DJS) team, responsible for the engineering, infrastructure and operational management of the team. The DJS service provides customers the ability to schedule long-running jobs that execute custom-defined scripts on end-hosts on a fixed rate, cron or event-triggered basis.
+•	Within 6 months, expanded the engineering team by 75%, reaching a total of 7 engineers. Coached and mentored engineers by establishing regular growth roadmap checkpoints, resulting in 4 SDE1 to SDE2 promotions and 1 SDE2 to Senior SDE promotion. Supervised an intern who returned as SDE1 and managed the performance of another engineer.
+•	As it was an internal team, I assumed multiple roles including Product Manager, Technical Project Manager, and occasionally UI/UX Designer for the product. This opportunity enabled me to take on various responsibilities
+•	Developed 4 Roadmaps for the team as well as a 3-year Vision Document between 2021-2023. Utilized a combination of bottom-up team brainstorming and top-down AWS mandates, working backwards from customer requests to construct the Roadmaps with stakeholder alignment
+•	Coordinated team roadmaps to ensure delivery of features as well as supporting AWS growth by expanding DJS to 6+ regions
+•	Accelerated AWS growth and expansion by reducing Region Build timelines by 99.4% through prioritizing automation of service onboarding for specific network fabric customers.
+•	Features delivered: Led a team of 4 engineers to develop DJS Serverless, a feature that enables DJS customers to schedule jobs that execute Lambda functions and Fargate instances without the need to provision end hosts. This was the first feature launch for DJS in over 5 years.
+
+Software Development Engineer                      Amazon Web Services, Vancouver, Canada/Iasi, Romania	                  August 2015 – May 2021
+Team Lead, Distributed Job Scheduler (DJS)                                                                                                                          August 2018 – May 2021
+•	As Team Lead, I helped grow the Distributed Job Scheduler team from 1 SDE (myself) and 1 SDM to 1 SDM and 6 SDEs. I revitalized the service, transitioning it out of Keep-The-Lights-On (KTLO) mode and relocated from Romania to Vancouver to fully integrate with the team culture, operational processes, and architecture reviews. As part of this, I traveled to Romania to fully imbibe the team culture, service architecture and team processes, enabling effective leadership as a Team Lead SDE.
+•	Improved delivery times of updated job execution statuses (Completed, Failed, Disabled) to customers by 99.67% and reduced DynamoDB usage by 90% by implementing a redesigned regional queue polling solution
+•	Established a weekly Operational Review mechanism to assess customer metrics, evaluate the service landscape, ensure accountability for Sev2 incidents and other spikes, and address action items with <1 day turnaround. Additionally, implemented operational procedure improvements and mentored team members to adopt these new mechanisms, ensuring continuous learning and maintain high AWS operational standards
+•	Amazon Bar-Raiser for Change Management and Security Review procedures; facilitated key launches while maintaining a high delivery, operational and security bar. Additionally trained 1 Principal Engineer, 1 Senior SDE, and 2 SDEs to become Bar-Raisers themselves.
+
+Software Development Engineer, AWS Simple Workflow/AWS Step Functions	        August 2015 – August 2018
+•	Launched AWS Step Functions at AWS:ReInvent 2016. Developed subset of public Console functionality and contributed to API design. Ensured resiliency and stable performance of system at launch, peak load and normal traffic durations by setting up load and continuous testing (canary) frameworks that simulated customer traffic and identified bottlenecks. Setup application monitoring that helped measure service performance and ensured high availability of service infrastructure and stable customer experience
+•	Increased developer efficiency and reduced time to production by 83% by implementing a fully continuous deployment framework which enabled AWS Simple Workflow to perform faster, automated deployments across 5 service components, while preserving high service availability
+•	Designed the API and implemented a self-service limit increase solution used across all Amazon orgs (including Retail & AWS) that resulted in a 37% drop in incoming ticket count for AWS Simple Workflow and AWS Step Functions, and improved developer efficiency by reducing time spent on manual tickets by 50%
+
+Product Manager	Connected Lab, Toronto, Canada	     May 2014 – September 2014
+•	Part of a fledgling 3-­person startup in the Internet-­of-­Things space. Acquired first project with clients who were VC-­backed by Eric Schmidt and Andreessen Horowitz in August 2014
+•	Defined Phase 1 product requirements by scoping and analyzing high-­‐level product strategy and organizing detailed user stories for development team
+•	Led expansions efforts by recruiting software, firmware, embedded, industrial engineers and UI/UX designers from over 100 candidates with previous experience at Amazon, Tesla, Facebook and Google 
+
+Middleware Researcher	Middleware Systems Research Group, Toronto, Canada
+ 
+          
+           May 2014 – January 2015
+ 
+•	Investigated PADRES (Publish/Subscribe Applied to Distributed Resource Scheduling) and extended networking capabilities for Future Internet Architecture (FIA) by adding support for CCN (Content-­‐Centric Networking) protocol developed by PARC
+•	Optimized CCN by extending for publish/subscribe routing and analyzed performance by executing test jobs on machines ranging from local Linux servers to the SciNet High-­Performance Computing Cluster
+•	Abstract
+EDUCATION
+University of Toronto, Bachelor of Electrical and Computer Engineering	      September 2010 – May 2015
+•	President’s Scholarship Recipient
+CORE SKILLS
+Multi-Tier Web Services	Technical Excellence	Effective Writer	Effective Communication
+Strategic Planning	AI/ML	Operational Excellence	Startup Experience
+Leadership	Robotics	DevOps	Innovation
+
+
