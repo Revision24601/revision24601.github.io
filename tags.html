@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tags — Nischay Mohan</title>
+    <meta name="description" content="Traverse the garden by interest — a shared tag system across essays and notes.">
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="alternate" type="application/rss+xml" title="Nischay Mohan — RSS" href="feed.xml">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <div class="wrap">
+            <a class="brand" href="index.html"><span class="leaf">&#127793;</span> Nischay Mohan</a>
+            <nav class="nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="now.html">Now</a>
+                <a href="writing.html">Writing</a>
+                <a href="notes.html">Notes</a>
+                <a href="travel.html">Travel</a>
+                <a href="contact.html">Contact</a>
+                <a href="feed.xml" class="nav-rss" title="RSS feed">RSS</a>
+                <button class="theme-toggle" data-theme-toggle type="button"
+                        aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme">
+                    <span class="icon-moon" aria-hidden="true">&#9789;</span>
+                    <span class="icon-sun" aria-hidden="true">&#9728;</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="kicker">Tags</p>
+                <h1>Traverse by interest</h1>
+                <p class="lede-sm">Tags are shared across essays and notes, so you can follow a thread
+                wherever it runs. Jump to a tag:</p>
+                <ul class="tags">
+                    <li><a class="tag" href="#payments">Payments</a></li>
+                    <li><a class="tag" href="#money-geopolitics">Money &amp; Geopolitics</a></li>
+                    <li><a class="tag" href="#ai">AI</a></li>
+                    <li><a class="tag" href="#systems">Systems &amp; Architecture</a></li>
+                    <li><a class="tag" href="#travel">Travel</a></li>
+                    <li><a class="tag" href="#notes">Notes</a></li>
+                </ul>
+            </div>
+
+            <section class="series" id="payments">
+                <h2>Payments</h2>
+                <p class="series-note">How value actually moves.</p>
+                <ul class="entry-list">
+                    <li><div class="entry-title"><a href="how-money-moves.html">How money moves</a></div></li>
+                    <li><div class="entry-title"><a href="notes.html#float">The float is where the money sleeps</a></div></li>
+                    <li><div class="entry-title"><a href="notes.html#idempotency">Payments code lives and dies by idempotency</a></div></li>
+                    <li><div class="entry-title"><a href="writing.html">A single coffee, traced end to end (stub)</a></div></li>
+                </ul>
+            </section>
+
+            <section class="series" id="money-geopolitics">
+                <h2>Money &amp; Geopolitics</h2>
+                <p class="series-note">Who controls the rails, and why it's power.</p>
+                <ul class="entry-list">
+                    <li><div class="entry-title"><a href="notes.html#swift">SWIFT moves messages, not money</a></div></li>
+                    <li><div class="entry-title"><a href="writing.html">Who controls the rails? (stub)</a></div></li>
+                </ul>
+            </section>
+
+            <section class="series" id="ai">
+                <h2>AI</h2>
+                <p class="series-note">AI as leverage over financial systems.</p>
+                <ul class="entry-list">
+                    <li><div class="entry-title"><a href="notes.html#ai-reconciliation">Reconciliation is where AI earns its keep</a></div></li>
+                    <li><div class="entry-title"><a href="writing.html">Where AI actually earns its keep in payments (stub)</a></div></li>
+                </ul>
+            </section>
+
+            <section class="series" id="systems">
+                <h2>Systems &amp; Architecture</h2>
+                <p class="series-note">The engineering underneath the money.</p>
+                <ul class="entry-list">
+                    <li><div class="entry-title"><a href="how-money-moves.html">How money moves</a></div></li>
+                    <li><div class="entry-title"><a href="notes.html#idempotency">Payments code lives and dies by idempotency</a></div></li>
+                </ul>
+            </section>
+
+            <section class="series" id="travel">
+                <h2>Travel</h2>
+                <p class="series-note">The personal surface.</p>
+                <ul class="entry-list">
+                    <li><div class="entry-title"><a href="travel.html">Cash, cards, and QR codes abroad</a></div></li>
+                    <li><div class="entry-title"><a href="travel.html">A running list of places</a></div></li>
+                </ul>
+            </section>
+
+            <section class="series" id="notes">
+                <h2>Notes</h2>
+                <p class="series-note">Everything in the flat, atomic space.</p>
+                <ul class="entry-list">
+                    <li><div class="entry-title"><a href="notes.html">Browse all notes &rarr;</a></div></li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <p>Tended by Nischay Mohan &middot; <a href="changelog.html">changelog</a> &middot;
+            <a href="feed.xml">RSS</a></p>
+        </div>
+    </footer>
+
+    <script src="static/js/theme.js"></script>
+</body>
+</html>

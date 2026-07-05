@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nischay Mohan — a digital garden</title>
+    <link>https://revision24601.github.io/</link>
+    <atom:link href="https://revision24601.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <description>A learn-in-public garden on how payment systems work, the geopolitics of money, and AI as leverage over financial systems.</description>
+    <language>en</language>
+    <lastBuildDate>Sun, 05 Jul 2026 00:00:00 +0000</lastBuildDate>
+
+    <item>
+      <title>How money moves</title>
+      <link>https://revision24601.github.io/how-money-moves.html</link>
+      <guid>https://revision24601.github.io/how-money-moves.html</guid>
+      <pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+      <description>Authorization vs. clearing vs. settlement, in plain language — the three steps most people compress into the word "payment".</description>
+    </item>
+
+    <item>
+      <title>The float is where the money sleeps</title>
+      <link>https://revision24601.github.io/notes.html#float</link>
+      <guid>https://revision24601.github.io/notes.html#float</guid>
+      <pubDate>Sat, 04 Jul 2026 00:00:00 +0000</pubDate>
+      <description>The gap between "authorized" and "settled" isn't a bug — it's a business, and a risk, all its own.</description>
+    </item>
+
+    <item>
+      <title>SWIFT moves messages, not money</title>
+      <link>https://revision24601.github.io/notes.html#swift</link>
+      <guid>https://revision24601.github.io/notes.html#swift</guid>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 +0000</pubDate>
+      <description>A tiny distinction that explains a surprising amount about sanctions and who holds power over the rails.</description>
+    </item>
+  </channel>
+</rss>

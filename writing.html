@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing — Nischay Mohan</title>
+    <meta name="description" content="Long-form essays, grouped into series: payments, money & geopolitics, and AI as leverage.">
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="alternate" type="application/rss+xml" title="Nischay Mohan — RSS" href="feed.xml">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <div class="wrap">
+            <a class="brand" href="index.html"><span class="leaf">&#127793;</span> Nischay Mohan</a>
+            <nav class="nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="now.html">Now</a>
+                <a href="writing.html" aria-current="page">Writing</a>
+                <a href="notes.html">Notes</a>
+                <a href="travel.html">Travel</a>
+                <a href="contact.html">Contact</a>
+                <a href="feed.xml" class="nav-rss" title="RSS feed">RSS</a>
+                <button class="theme-toggle" data-theme-toggle type="button"
+                        aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme">
+                    <span class="icon-moon" aria-hidden="true">&#9789;</span>
+                    <span class="icon-sun" aria-hidden="true">&#9728;</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="kicker">Writing</p>
+                <h1>Essays, grouped into series</h1>
+                <p class="lede-sm">Longer pieces that build on each other. Series grow slowly; expect
+                seedlings and stubs alongside finished writing.</p>
+            </div>
+
+            <section class="series">
+                <h2>The plumbing of payments</h2>
+                <p class="series-note">How value actually gets from one account to another.</p>
+                <ul class="entry-list">
+                    <li>
+                        <div class="entry-title"><a href="how-money-moves.html">How money moves</a>
+                            <span class="badge badge--seedling">&#127793; Seedling</span></div>
+                        <p>Authorization vs. clearing vs. settlement, in plain language.</p>
+                        <ul class="tags">
+                            <li><a class="tag" href="tags.html#payments">Payments</a></li>
+                            <li><a class="tag" href="tags.html#systems">Systems &amp; Architecture</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="entry-title">A single coffee, traced end to end
+                            <span class="badge badge--stub">Stub</span></div>
+                        <p>Following one $10 purchase through every hop &mdash; and every fee &mdash; on its
+                        way home. <span class="now-note">(planned)</span></p>
+                        <ul class="tags">
+                            <li><a class="tag" href="tags.html#payments">Payments</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="series">
+                <h2>Money &amp; geopolitics</h2>
+                <p class="series-note">Who owns the rails, and what "control" really means.</p>
+                <ul class="entry-list">
+                    <li>
+                        <div class="entry-title">Who controls the rails?
+                            <span class="badge badge--stub">Stub</span></div>
+                        <p>A map of the systems that clear cross-border money, and what happens when you
+                        can be removed from one. <span class="now-note">(planned)</span></p>
+                        <ul class="tags">
+                            <li><a class="tag" href="tags.html#money-geopolitics">Money &amp; Geopolitics</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="series">
+                <h2>AI as leverage</h2>
+                <p class="series-note">Where machine intelligence genuinely changes financial systems.</p>
+                <ul class="entry-list">
+                    <li>
+                        <div class="entry-title">Where AI actually earns its keep in payments
+                            <span class="badge badge--stub">Stub</span></div>
+                        <p>Reconciliation, fraud, and dispute triage &mdash; the unglamorous places models
+                        move the needle. <span class="now-note">(planned)</span></p>
+                        <ul class="tags">
+                            <li><a class="tag" href="tags.html#ai">AI</a></li>
+                            <li><a class="tag" href="tags.html#payments">Payments</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <p>Tended by Nischay Mohan &middot; <a href="changelog.html">changelog</a> &middot;
+            <a href="feed.xml">RSS</a></p>
+        </div>
+    </footer>
+
+    <script src="static/js/theme.js"></script>
+</body>
+</html>

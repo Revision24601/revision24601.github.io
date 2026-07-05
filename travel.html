@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel — Nischay Mohan</title>
+    <meta name="description" content="Places I've wandered, and what they taught me.">
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="alternate" type="application/rss+xml" title="Nischay Mohan — RSS" href="feed.xml">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <div class="wrap">
+            <a class="brand" href="index.html"><span class="leaf">&#127793;</span> Nischay Mohan</a>
+            <nav class="nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="now.html">Now</a>
+                <a href="writing.html">Writing</a>
+                <a href="notes.html">Notes</a>
+                <a href="travel.html" aria-current="page">Travel</a>
+                <a href="contact.html">Contact</a>
+                <a href="feed.xml" class="nav-rss" title="RSS feed">RSS</a>
+                <button class="theme-toggle" data-theme-toggle type="button"
+                        aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme">
+                    <span class="icon-moon" aria-hidden="true">&#9789;</span>
+                    <span class="icon-sun" aria-hidden="true">&#9728;</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="kicker">Travel &amp; interests</p>
+                <h1>Places I've wandered</h1>
+                <p class="lede-sm">The personal surface of the garden. Half travel log, half field notes on
+                how money and daily life actually work somewhere new.</p>
+            </div>
+
+            <ul class="card-grid">
+                <li class="card">
+                    <h3>Cash, cards, and QR codes abroad
+                        <span class="badge badge--seedling">&#127793; Seedling</span></h3>
+                    <p>The fastest way to understand a country's relationship with money is to try to pay
+                    for a coffee three different ways. Notes on where each one wins.</p>
+                    <ul class="tags">
+                        <li><a class="tag" href="tags.html#travel">Travel</a></li>
+                        <li><a class="tag" href="tags.html#payments">Payments</a></li>
+                    </ul>
+                    <p class="meta"><span>Tended <time datetime="2026-07-01">1 Jul 2026</time></span></p>
+                </li>
+                <li class="card">
+                    <h3>A running list of places
+                        <span class="badge badge--stub">Stub</span></h3>
+                    <p>Somewhere to jot the trips worth remembering and the small lessons each one left
+                    behind. Growing over time.</p>
+                    <ul class="tags">
+                        <li><a class="tag" href="tags.html#travel">Travel</a></li>
+                    </ul>
+                    <p class="meta"><span>Tended <time datetime="2026-06-30">30 Jun 2026</time></span></p>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <p>Tended by Nischay Mohan &middot; <a href="changelog.html">changelog</a> &middot;
+            <a href="feed.xml">RSS</a></p>
+        </div>
+    </footer>
+
+    <script src="static/js/theme.js"></script>
+</body>
+</html>

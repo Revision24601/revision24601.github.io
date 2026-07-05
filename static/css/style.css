@@ -163,7 +163,8 @@ code {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
     padding-block: 0.9rem;
 }
 .brand {
@@ -179,18 +180,27 @@ code {
 .nav {
     display: flex;
     align-items: center;
-    gap: 0.35rem;
+    flex-wrap: wrap;
+    gap: 0.15rem;
     font-family: var(--font-sans);
-    font-size: 0.95rem;
+    font-size: 0.92rem;
 }
 .nav a {
     color: var(--muted);
     text-decoration: none;
-    padding: 0.35rem 0.6rem;
+    padding: 0.35rem 0.55rem;
     border-radius: 6px;
 }
 .nav a:hover { color: var(--text); background: var(--accent-soft); }
 .nav a[aria-current="page"] { color: var(--text); font-weight: 600; }
+.nav .nav-rss {
+    color: var(--accent);
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    border: 1px solid var(--border);
+    margin-left: 0.15rem;
+}
+.nav .nav-rss:hover { border-color: var(--accent); background: var(--accent-soft); }
 
 /* Theme toggle */
 .theme-toggle {
@@ -402,6 +412,130 @@ code {
 @media (min-width: 40rem) {
     body { font-size: 1.15rem; }
     .card-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ---- Section headers ----------------------------------------------------- */
+.section-head { margin-top: 0; }
+.section-head .kicker {
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.72rem;
+    color: var(--faint);
+    margin-bottom: 0.4rem;
+}
+.lede-sm { color: var(--muted); font-size: 1.05rem; }
+
+/* ---- Signposts (front-door links into sections) -------------------------- */
+.signposts {
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0 0;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+}
+.signpost {
+    display: block;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 1.1rem 1.25rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.signpost:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--shadow);
+    border-color: var(--accent);
+}
+.signpost .sp-title {
+    font-family: var(--font-sans);
+    font-weight: 650;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+.signpost .sp-title::after { content: "\2192"; color: var(--accent); }
+.signpost p { color: var(--muted); margin: 0.4rem 0 0; font-size: 0.95rem; }
+
+/* ---- Tags (shared across essays + notes) --------------------------------- */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.7rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+.tag {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: var(--muted);
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.15rem 0.6rem;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.tag:hover { color: var(--text); border-color: var(--accent); }
+.tag::before { content: "#"; opacity: 0.5; }
+
+/* ---- Writing series ------------------------------------------------------ */
+.series { margin-top: 2.25rem; }
+.series > h2 { margin-bottom: 0.15rem; }
+.series .series-note {
+    color: var(--muted);
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    margin-top: 0;
+}
+.entry-list { list-style: none; padding: 0; margin: 0.75rem 0 0; }
+.entry-list li {
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--border);
+}
+.entry-list .entry-title {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+.entry-list .entry-title a { color: var(--text); text-decoration: none; }
+.entry-list .entry-title a:hover { color: var(--accent); }
+.entry-list p { color: var(--muted); margin: 0.3rem 0 0; font-size: 0.96rem; }
+
+/* ---- Now page ------------------------------------------------------------ */
+.now-note {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--faint);
+}
+
+/* ---- Changelog ----------------------------------------------------------- */
+.changelog { list-style: none; padding: 0; margin: 1.5rem 0 0; }
+.changelog li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--border);
+}
+.changelog time {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--faint);
+    flex: 0 0 6rem;
+}
+.changelog .cl-body { flex: 1 1 16rem; }
+
+/* Give anchored tag sections room below the sticky header */
+:target { scroll-margin-top: 5.5rem; }
+
+@media (min-width: 40rem) {
+    .signposts { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (prefers-reduced-motion: reduce) {

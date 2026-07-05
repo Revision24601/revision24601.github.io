@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nischay Mohan — a digital garden on money, rails & AI</title>
-    <meta name="description" content="A working notebook on how money actually moves: the plumbing of payments, the geopolitics of the rails, and AI as leverage over financial systems.">
-    <!-- Set the theme before paint to avoid a flash of the wrong colours. -->
+    <meta name="description" content="A first-person digital garden on how payment systems work, the geopolitics of money, and AI as leverage over financial systems.">
     <script>
       (function () {
         try {
@@ -16,6 +15,7 @@
       })();
     </script>
     <link rel="stylesheet" href="static/css/style.css">
+    <link rel="alternate" type="application/rss+xml" title="Nischay Mohan — RSS" href="feed.xml">
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -25,8 +25,13 @@
             <a class="brand" href="index.html"><span class="leaf">&#127793;</span> Nischay Mohan</a>
             <nav class="nav" aria-label="Primary">
                 <a href="index.html" aria-current="page">Home</a>
-                <a href="projects.html">Notes</a>
                 <a href="about.html">About</a>
+                <a href="now.html">Now</a>
+                <a href="writing.html">Writing</a>
+                <a href="notes.html">Notes</a>
+                <a href="travel.html">Travel</a>
+                <a href="contact.html">Contact</a>
+                <a href="feed.xml" class="nav-rss" title="RSS feed">RSS</a>
                 <button class="theme-toggle" data-theme-toggle type="button"
                         aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme">
                     <span class="icon-moon" aria-hidden="true">&#9789;</span>
@@ -39,87 +44,29 @@
     <main id="main">
         <div class="wrap">
             <section class="intro">
-                <p class="kicker">Digital garden &middot; tended in public</p>
-                <h1>How money moves &mdash; and who moves it.</h1>
-                <p class="lede">A working notebook at the intersection of three things: the plumbing of
-                payment systems, the geopolitics of the rails that carry money, and AI as leverage over
-                financial systems.</p>
-
-                <p>This isn't a r&eacute;sum&eacute;. It's a <strong>commonplace book</strong> &mdash; part
-                long-form essay, part short atomic note &mdash; that I tend over time. Some pieces are
-                finished; many are seedlings; a few are just stubs. I think in public here, so expect ideas
-                to grow, get pruned, and cross-link as I learn.</p>
-
-                <ul class="threads">
-                    <li><strong>Payments under the hood.</strong> What actually happens between tapping a
-                    card and money landing in a merchant's account.</li>
-                    <li><strong>The geopolitics of money.</strong> Who owns the rails, who can switch them
-                    off, and why that is quietly one of the most important forms of power.</li>
-                    <li><strong>AI as leverage.</strong> Where machine intelligence genuinely changes the
-                    economics of moving, checking, and governing money &mdash; and where it's just hype.</li>
+                <p class="kicker">A digital garden &middot; tended in public</p>
+                <h1>Hello &mdash; I'm Nischay.</h1>
+                <p class="lede">I'm an engineer who fell down the rabbit hole of how money actually
+                moves. I write here through three lenses: the <strong>plumbing of payment systems</strong>,
+                the <strong>geopolitics of the money rails</strong>, and <strong>AI as leverage</strong>
+                over financial systems. Think of this as a commonplace book I keep in the open &mdash; a
+                place to tend ideas, not a pitch.</p>
+                <ul class="tags" aria-label="Themes">
+                    <li><a class="tag" href="tags.html#payments">Payments</a></li>
+                    <li><a class="tag" href="tags.html#money-geopolitics">Money &amp; Geopolitics</a></li>
+                    <li><a class="tag" href="tags.html#ai">AI</a></li>
+                    <li><a class="tag" href="tags.html#systems">Systems &amp; Architecture</a></li>
                 </ul>
             </section>
 
             <hr>
 
-            <!-- Signature element: a hand-drawn-feeling flow diagram. It's inline SVG
-                 painted with currentColor, so it reads cleanly in light and dark. -->
-            <figure class="diagram" role="group" aria-labelledby="dia1-cap">
-                <svg viewBox="0 0 340 540" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <defs>
-                        <filter id="hd1" x="-20%" y="-20%" width="140%" height="140%">
-                            <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="2" seed="5" result="n"/>
-                            <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
-                        </filter>
-                        <marker id="arrow1" viewBox="0 0 10 10" refX="8" refY="5"
-                                markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                            <path class="arrowhead" d="M0,0 L10,5 L0,10 z"/>
-                        </marker>
-                    </defs>
-
-                    <g filter="url(#hd1)">
-                        <!-- Flow: authorization hops down the chain -->
-                        <line class="flow" x1="124" y1="60"  x2="124" y2="112" marker-end="url(#arrow1)"/>
-                        <line class="flow" x1="124" y1="166" x2="124" y2="218" marker-end="url(#arrow1)"/>
-                        <line class="flow" x1="124" y1="272" x2="124" y2="324" marker-end="url(#arrow1)"/>
-                        <line class="flow" x1="124" y1="378" x2="124" y2="430" marker-end="url(#arrow1)"/>
-                        <!-- Return path: the money actually settles back up -->
-                        <path class="flow" d="M224,457 C296,457 305,448 305,420 L305,70 C305,42 296,33 224,33"
-                              marker-end="url(#arrow1)"/>
-
-                        <rect class="node" x="24" y="6"   width="200" height="54" rx="10"/>
-                        <rect class="node" x="24" y="112" width="200" height="54" rx="10"/>
-                        <rect class="node" x="24" y="218" width="200" height="54" rx="10"/>
-                        <rect class="node" x="24" y="324" width="200" height="54" rx="10"/>
-                        <rect class="node" x="24" y="430" width="200" height="54" rx="10"/>
-                    </g>
-
-                    <!-- Text stays un-displaced so it's crisp -->
-                    <text class="label" x="124" y="30"  text-anchor="middle">You</text>
-                    <text class="sub"   x="124" y="48"  text-anchor="middle">the cardholder</text>
-                    <text class="label" x="124" y="136" text-anchor="middle">Merchant</text>
-                    <text class="sub"   x="124" y="154" text-anchor="middle">the shop</text>
-                    <text class="label" x="124" y="242" text-anchor="middle">Acquirer</text>
-                    <text class="sub"   x="124" y="260" text-anchor="middle">the shop's bank</text>
-                    <text class="label" x="124" y="348" text-anchor="middle">Card network</text>
-                    <text class="sub"   x="124" y="366" text-anchor="middle">the rails</text>
-                    <text class="label" x="124" y="454" text-anchor="middle">Issuer</text>
-                    <text class="sub"   x="124" y="472" text-anchor="middle">your bank</text>
-
-                    <text class="flow-label" x="132" y="92" text-anchor="start">1 &middot; authorizes</text>
-                    <text class="flow-label" x="318" y="250" text-anchor="middle"
-                          transform="rotate(-90 318 250)">2 &middot; settles</text>
-                </svg>
-                <figcaption id="dia1-cap">A card payment, end to end. The <em>authorization</em> hops
-                down the chain in a second or two; the actual money <em>settles</em> back up over hours or
-                days. Two different clocks &mdash; that gap is where a lot of the interesting stuff lives.</figcaption>
-            </figure>
-
-            <hr>
-
             <section>
-                <h2>In the garden</h2>
-                <p>A few things currently growing. Dates show when a note was planted and last tended.</p>
+                <div class="section-head">
+                    <h2>Featured &amp; recently tended</h2>
+                    <p class="lede-sm">A hand-picked way in &mdash; not a firehose. A few things I'd
+                    read first, or that I've watered lately.</p>
+                </div>
 
                 <ul class="card-grid">
                     <li class="card">
@@ -127,49 +74,67 @@
                             <span class="badge badge--seedling">&#127793; Seedling</span></h3>
                         <p>Authorization vs. clearing vs. settlement, in plain language &mdash; the three
                         steps most people compress into the word "payment".</p>
-                        <p class="meta">
-                            <span>Created <time datetime="2026-06-28">28 Jun 2026</time></span>
-                            <span>Tended <time datetime="2026-07-05">5 Jul 2026</time></span>
-                        </p>
+                        <ul class="tags">
+                            <li><a class="tag" href="tags.html#payments">Payments</a></li>
+                            <li><a class="tag" href="tags.html#systems">Systems &amp; Architecture</a></li>
+                        </ul>
+                        <p class="meta"><span>Tended <time datetime="2026-07-05">5 Jul 2026</time></span></p>
                     </li>
                     <li class="card">
-                        <h3><a href="projects.html">Who controls the rails?</a>
-                            <span class="badge badge--stub">Stub</span></h3>
-                        <p>A map of the systems that clear cross-border money, and what "control" actually
-                        means when you can be removed from a network.</p>
-                        <p class="meta">
-                            <span>Created <time datetime="2026-07-02">2 Jul 2026</time></span>
-                            <span>Tended <time datetime="2026-07-02">2 Jul 2026</time></span>
-                        </p>
+                        <h3><a href="notes.html#float">The float is where the money sleeps</a>
+                            <span class="badge badge--evergreen">Note</span></h3>
+                        <p>The gap between "authorized" and "settled" isn't a bug &mdash; it's a business,
+                        and a risk, all its own.</p>
+                        <ul class="tags">
+                            <li><a class="tag" href="tags.html#payments">Payments</a></li>
+                        </ul>
+                        <p class="meta"><span>Tended <time datetime="2026-07-04">4 Jul 2026</time></span></p>
                     </li>
                     <li class="card">
-                        <h3><a href="projects.html">AI as leverage over money</a>
-                            <span class="badge badge--stub">Stub</span></h3>
-                        <p>Where models genuinely change the economics of moving and checking money &mdash;
-                        and where "AI" is doing rhetorical rather than real work.</p>
-                        <p class="meta">
-                            <span>Created <time datetime="2026-07-03">3 Jul 2026</time></span>
-                            <span>Tended <time datetime="2026-07-03">3 Jul 2026</time></span>
-                        </p>
-                    </li>
-                    <li class="card">
-                        <h3><a href="about.html">About this garden</a>
-                            <span class="badge badge--evergreen">Colophon</span></h3>
-                        <p>Why a garden and not a portfolio, how it's built, and how to read the seedling /
-                        stub / evergreen labels.</p>
-                        <p class="meta">
-                            <span>Created <time datetime="2026-06-28">28 Jun 2026</time></span>
-                            <span>Tended <time datetime="2026-07-05">5 Jul 2026</time></span>
-                        </p>
+                        <h3><a href="notes.html#swift">SWIFT moves messages, not money</a>
+                            <span class="badge badge--evergreen">Note</span></h3>
+                        <p>A tiny distinction that explains a surprising amount about sanctions and who
+                        holds power over the rails.</p>
+                        <ul class="tags">
+                            <li><a class="tag" href="tags.html#money-geopolitics">Money &amp; Geopolitics</a></li>
+                        </ul>
+                        <p class="meta"><span>Tended <time datetime="2026-07-03">3 Jul 2026</time></span></p>
                     </li>
                 </ul>
+            </section>
+
+            <hr>
+
+            <section>
+                <div class="section-head">
+                    <h2>Wander in</h2>
+                    <p class="lede-sm">Three doors into the garden. Take whichever one you like.</p>
+                </div>
+                <div class="signposts">
+                    <a class="signpost" href="writing.html">
+                        <span class="sp-title">Writing</span>
+                        <p>Long-form essays, grouped into series &mdash; the plumbing of payments, money
+                        &amp; geopolitics, and AI as leverage.</p>
+                    </a>
+                    <a class="signpost" href="notes.html">
+                        <span class="sp-title">Notes</span>
+                        <p>Short atomic cards &mdash; single ideas, half-formed thoughts, and things I
+                        want to remember.</p>
+                    </a>
+                    <a class="signpost" href="travel.html">
+                        <span class="sp-title">Travel</span>
+                        <p>The personal surface &mdash; places I've wandered and what they taught me about
+                        how the world moves.</p>
+                    </a>
+                </div>
             </section>
         </div>
     </main>
 
     <footer class="site-footer">
         <div class="wrap">
-            <p>Tended by Nischay Mohan &middot; a learn-in-public digital garden.
+            <p>Tended by Nischay Mohan &middot; a learn-in-public digital garden &middot;
+            <a href="changelog.html">changelog</a> &middot; <a href="feed.xml">RSS</a>
             <br>Everything here is conceptual and general &mdash; opinions are my own.</p>
         </div>
     </footer>

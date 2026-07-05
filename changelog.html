@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changelog — Nischay Mohan</title>
+    <meta name="description" content="What's been planted, pruned, and tended in the garden.">
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="alternate" type="application/rss+xml" title="Nischay Mohan — RSS" href="feed.xml">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <div class="wrap">
+            <a class="brand" href="index.html"><span class="leaf">&#127793;</span> Nischay Mohan</a>
+            <nav class="nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="now.html">Now</a>
+                <a href="writing.html">Writing</a>
+                <a href="notes.html">Notes</a>
+                <a href="travel.html">Travel</a>
+                <a href="contact.html">Contact</a>
+                <a href="feed.xml" class="nav-rss" title="RSS feed">RSS</a>
+                <button class="theme-toggle" data-theme-toggle type="button"
+                        aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme">
+                    <span class="icon-moon" aria-hidden="true">&#9789;</span>
+                    <span class="icon-sun" aria-hidden="true">&#9728;</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="kicker">Changelog</p>
+                <h1>What's been tended</h1>
+                <p class="lede-sm">A garden's update history &mdash; what got planted, pruned, or watered,
+                newest first. In the learn-in-public spirit, the messiness is the point.</p>
+            </div>
+
+            <ul class="changelog">
+                <li>
+                    <time datetime="2026-07-05">5 Jul 2026</time>
+                    <span class="cl-body">Laid out the information architecture: Home, About, Now, Writing,
+                    Notes, Travel, Contact, RSS. Added a shared tag system and this changelog.</span>
+                </li>
+                <li>
+                    <time datetime="2026-07-05">5 Jul 2026</time>
+                    <span class="cl-body">Rebuilt the Home page as a calm front door &mdash; intro, a curated
+                    "featured &amp; recently tended" shortlist, and signposts into each section.</span>
+                </li>
+                <li>
+                    <time datetime="2026-07-05">5 Jul 2026</time>
+                    <span class="cl-body">Established the design foundation: typography-first warm theme,
+                    light/dark toggle, garden signals, and hand-drawn flow diagrams.</span>
+                </li>
+                <li>
+                    <time datetime="2026-06-28">28 Jun 2026</time>
+                    <span class="cl-body">Planted the garden. Decided this should be a commonplace book,
+                    not a r&eacute;sum&eacute;.</span>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <p>Tended by Nischay Mohan &middot; <a href="changelog.html">changelog</a> &middot;
+            <a href="feed.xml">RSS</a></p>
+        </div>
+    </footer>
+
+    <script src="static/js/theme.js"></script>
+</body>
+</html>
