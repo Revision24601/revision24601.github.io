@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About this garden &mdash; Nischay Mohan</title>
+    <title>About this garden — Nischay Mohan</title>
     <meta name="description" content="Why a garden and not a portfolio, and how to read the seedling / stub / evergreen labels.">
     <script>
       (function () {
@@ -15,6 +15,7 @@
       })();
     </script>
     <link rel="stylesheet" href="static/css/style.css">
+    <link rel="alternate" type="application/rss+xml" title="Nischay Mohan — RSS" href="feed.xml">
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -24,8 +25,13 @@
             <a class="brand" href="index.html"><span class="leaf">&#127793;</span> Nischay Mohan</a>
             <nav class="nav" aria-label="Primary">
                 <a href="index.html">Home</a>
-                <a href="projects.html">Notes</a>
                 <a href="about.html" aria-current="page">About</a>
+                <a href="now.html">Now</a>
+                <a href="writing.html">Writing</a>
+                <a href="notes.html">Notes</a>
+                <a href="travel.html">Travel</a>
+                <a href="contact.html">Contact</a>
+                <a href="feed.xml" class="nav-rss" title="RSS feed">RSS</a>
                 <button class="theme-toggle" data-theme-toggle type="button"
                         aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme">
                     <span class="icon-moon" aria-hidden="true">&#9789;</span>
@@ -69,15 +75,27 @@
                     though nothing here is ever truly "done".</li>
                 </ul>
 
+                <h2>How to get around</h2>
+                <p><a href="writing.html">Writing</a> holds long-form essays grouped into series;
+                <a href="notes.html">Notes</a> is the flat, atomic space; and everything is cross-linked by
+                <a href="tags.html">tag</a> so you can follow a thread by interest. The
+                <a href="changelog.html">changelog</a> records what's been tended lately.</p>
+
                 <h2>How it's built</h2>
                 <p>Deliberately boring: hand-written HTML and CSS, system fonts only, a sprinkle of
                 JavaScript for the light/dark toggle, and inline SVG for the hand-drawn diagrams. Fast to
                 load, easy to tend.</p>
 
+                <ul class="tags">
+                    <li><a class="tag" href="tags.html#notes">Notes</a></li>
+                    <li><a class="tag" href="tags.html#systems">Systems &amp; Architecture</a></li>
+                </ul>
+
                 <aside class="backlinks">
                     <h2>Related</h2>
                     <ul>
                         <li><a href="how-money-moves.html">How money moves</a></li>
+                        <li><a href="now.html">What I'm doing now</a></li>
                         <li><a href="index.html">Back to the front page</a></li>
                     </ul>
                 </aside>
@@ -87,7 +105,8 @@
 
     <footer class="site-footer">
         <div class="wrap">
-            <p>Tended by Nischay Mohan &middot; a learn-in-public digital garden.</p>
+            <p>Tended by Nischay Mohan &middot; <a href="changelog.html">changelog</a> &middot;
+            <a href="feed.xml">RSS</a></p>
         </div>
     </footer>
 

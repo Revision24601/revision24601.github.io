@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes — Nischay Mohan</title>
+    <meta name="description" content="Short atomic notes — single ideas about payments, money, and AI.">
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="alternate" type="application/rss+xml" title="Nischay Mohan — RSS" href="feed.xml">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <div class="wrap">
+            <a class="brand" href="index.html"><span class="leaf">&#127793;</span> Nischay Mohan</a>
+            <nav class="nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="now.html">Now</a>
+                <a href="writing.html">Writing</a>
+                <a href="notes.html" aria-current="page">Notes</a>
+                <a href="travel.html">Travel</a>
+                <a href="contact.html">Contact</a>
+                <a href="feed.xml" class="nav-rss" title="RSS feed">RSS</a>
+                <button class="theme-toggle" data-theme-toggle type="button"
+                        aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme">
+                    <span class="icon-moon" aria-hidden="true">&#9789;</span>
+                    <span class="icon-sun" aria-hidden="true">&#9728;</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="kicker">Notes</p>
+                <h1>Short atomic notes</h1>
+                <p class="lede-sm">One idea per card. A flat, freeing space &mdash; no hierarchy, no
+                pressure to be finished. Browse, or traverse by <a href="tags.html">tag</a>.</p>
+            </div>
+
+            <ul class="card-grid">
+                <li class="card" id="float">
+                    <h3>The float is where the money sleeps
+                        <span class="badge badge--evergreen">Note</span></h3>
+                    <p>Between "authorized" and "settled" there's a gap &mdash; the <em>float</em>. It looks
+                    like a delay, but it's really a place where risk, liquidity, and a chunk of the
+                    payments business quietly live.</p>
+                    <ul class="tags">
+                        <li><a class="tag" href="tags.html#payments">Payments</a></li>
+                    </ul>
+                    <p class="meta"><span>Tended <time datetime="2026-07-04">4 Jul 2026</time></span></p>
+                </li>
+
+                <li class="card" id="swift">
+                    <h3>SWIFT moves messages, not money
+                        <span class="badge badge--evergreen">Note</span></h3>
+                    <p>SWIFT is a secure messaging network &mdash; it tells banks to move money; it doesn't
+                    move it. That single distinction explains a lot about how sanctions and network
+                    access become instruments of power.</p>
+                    <ul class="tags">
+                        <li><a class="tag" href="tags.html#money-geopolitics">Money &amp; Geopolitics</a></li>
+                        <li><a class="tag" href="tags.html#payments">Payments</a></li>
+                    </ul>
+                    <p class="meta"><span>Tended <time datetime="2026-07-03">3 Jul 2026</time></span></p>
+                </li>
+
+                <li class="card" id="idempotency">
+                    <h3>Payments code lives and dies by idempotency
+                        <span class="badge badge--seedling">&#127793; Seedling</span></h3>
+                    <p>Networks retry. If "charge $10" can run twice, someone gets charged twice. An
+                    idempotency key &mdash; a promise that the same request only happens once &mdash; is the
+                    small idea holding a lot of financial systems together.</p>
+                    <ul class="tags">
+                        <li><a class="tag" href="tags.html#systems">Systems &amp; Architecture</a></li>
+                        <li><a class="tag" href="tags.html#payments">Payments</a></li>
+                    </ul>
+                    <p class="meta"><span>Tended <time datetime="2026-07-02">2 Jul 2026</time></span></p>
+                </li>
+
+                <li class="card" id="ai-reconciliation">
+                    <h3>Reconciliation is where AI earns its keep
+                        <span class="badge badge--stub">Stub</span></h3>
+                    <p>Everyone wants AI for the flashy stuff. The real, boring win is matching messy
+                    records that should agree but don't &mdash; and explaining why.</p>
+                    <ul class="tags">
+                        <li><a class="tag" href="tags.html#ai">AI</a></li>
+                        <li><a class="tag" href="tags.html#payments">Payments</a></li>
+                    </ul>
+                    <p class="meta"><span>Tended <time datetime="2026-07-01">1 Jul 2026</time></span></p>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <p>Tended by Nischay Mohan &middot; <a href="changelog.html">changelog</a> &middot;
+            <a href="feed.xml">RSS</a></p>
+        </div>
+    </footer>
+
+    <script src="static/js/theme.js"></script>
+</body>
+</html>

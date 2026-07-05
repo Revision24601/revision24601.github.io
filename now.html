@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Now — Nischay Mohan</title>
+    <meta name="description" content="What I'm focused on right now.">
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="alternate" type="application/rss+xml" title="Nischay Mohan — RSS" href="feed.xml">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <div class="wrap">
+            <a class="brand" href="index.html"><span class="leaf">&#127793;</span> Nischay Mohan</a>
+            <nav class="nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="now.html" aria-current="page">Now</a>
+                <a href="writing.html">Writing</a>
+                <a href="notes.html">Notes</a>
+                <a href="travel.html">Travel</a>
+                <a href="contact.html">Contact</a>
+                <a href="feed.xml" class="nav-rss" title="RSS feed">RSS</a>
+                <button class="theme-toggle" data-theme-toggle type="button"
+                        aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme">
+                    <span class="icon-moon" aria-hidden="true">&#9789;</span>
+                    <span class="icon-sun" aria-hidden="true">&#9728;</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="wrap">
+            <article class="essay">
+                <h1>Now</h1>
+                <p class="meta">
+                    <span class="badge badge--seedling">&#127793; Seedling</span>
+                    <span>Last tended <time datetime="2026-07-05">5 Jul 2026</time></span>
+                </p>
+                <p class="now-note">A <a href="https://nownownow.com/about" rel="noopener">/now page</a> &mdash;
+                what has my attention at the moment, not an archive.</p>
+
+                <p>Right now I'm:</p>
+                <ul>
+                    <li><strong>Tending the payments series.</strong> Turning "How money moves" from a
+                    seedling into something I'd happily hand a newcomer.</li>
+                    <li><strong>Reading about the geopolitics of the rails</strong> &mdash; how network
+                    access became a lever of statecraft, told with public examples only.</li>
+                    <li><strong>Poking at AI for the boring parts of finance</strong> &mdash; reconciliation
+                    and dispute triage, where it quietly pays off.</li>
+                    <li><strong>Learning in public</strong> by rebuilding this site as a garden rather than
+                    a r&eacute;sum&eacute;.</li>
+                </ul>
+
+                <p>If any of that overlaps with what you're thinking about, the <a href="contact.html">door
+                is open</a>.</p>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <p>Tended by Nischay Mohan &middot; <a href="changelog.html">changelog</a> &middot;
+            <a href="feed.xml">RSS</a></p>
+        </div>
+    </footer>
+
+    <script src="static/js/theme.js"></script>
+</body>
+</html>
