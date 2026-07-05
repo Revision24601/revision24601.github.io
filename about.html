@@ -3,23 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Nischay Mohan</title>
+    <title>About this garden &mdash; Nischay Mohan</title>
+    <meta name="description" content="Why a garden and not a portfolio, and how to read the seedling / stub / evergreen labels.">
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
     <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
-    <div class="test-banner">Testing</div>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="projects.html">Projects</a>
-    </nav>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <main>
-        <h1>About Me</h1>
-        <p>This is where you can write about yourself.</p>
+    <header class="site-header">
+        <div class="wrap">
+            <a class="brand" href="index.html"><span class="leaf">&#127793;</span> Nischay Mohan</a>
+            <nav class="nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="projects.html">Notes</a>
+                <a href="about.html" aria-current="page">About</a>
+                <button class="theme-toggle" data-theme-toggle type="button"
+                        aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme">
+                    <span class="icon-moon" aria-hidden="true">&#9789;</span>
+                    <span class="icon-sun" aria-hidden="true">&#9728;</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="wrap">
+            <article class="essay">
+                <h1>About this garden</h1>
+                <p class="meta">
+                    <span class="badge badge--evergreen">Colophon</span>
+                    <span>Last tended <time datetime="2026-07-05">5 Jul 2026</time></span>
+                </p>
+
+                <p>This is a <strong>digital garden</strong>, not a portfolio. A portfolio is finished and
+                sells you something; a garden is tended, changes over time, and is happy to show
+                half-grown ideas. I write here to think in public about how financial systems actually
+                work.</p>
+
+                <h2>What grows here</h2>
+                <p>Three threads, all kept conceptual and general:</p>
+                <ul>
+                    <li><strong>Payments under the hood</strong> &mdash; the mechanics of moving money.</li>
+                    <li><strong>The geopolitics of money</strong> &mdash; who controls the rails, and why
+                    that's power.</li>
+                    <li><strong>AI as leverage</strong> &mdash; where machine intelligence really changes
+                    the economics of finance.</li>
+                </ul>
+
+                <h2>How to read the labels</h2>
+                <ul>
+                    <li><span class="badge badge--stub">Stub</span> a placeholder &mdash; a title and a
+                    sentence, waiting to be written.</li>
+                    <li><span class="badge badge--seedling">&#127793; Seedling</span> young and growing &mdash;
+                    real but unfinished, likely to change.</li>
+                    <li><span class="badge badge--evergreen">Evergreen</span> tended enough that I trust it,
+                    though nothing here is ever truly "done".</li>
+                </ul>
+
+                <h2>How it's built</h2>
+                <p>Deliberately boring: hand-written HTML and CSS, system fonts only, a sprinkle of
+                JavaScript for the light/dark toggle, and inline SVG for the hand-drawn diagrams. Fast to
+                load, easy to tend.</p>
+
+                <aside class="backlinks">
+                    <h2>Related</h2>
+                    <ul>
+                        <li><a href="how-money-moves.html">How money moves</a></li>
+                        <li><a href="index.html">Back to the front page</a></li>
+                    </ul>
+                </aside>
+            </article>
+        </div>
     </main>
 
-    <footer>
-        <p>© 2025 Nischay Mohan | <a href="mailto:nischaym@amazon.com">Contact Me</a></p>
+    <footer class="site-footer">
+        <div class="wrap">
+            <p>Tended by Nischay Mohan &middot; a learn-in-public digital garden.</p>
+        </div>
     </footer>
+
+    <script src="static/js/theme.js"></script>
 </body>
 </html>
