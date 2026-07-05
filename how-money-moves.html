@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How money moves &mdash; Nischay Mohan</title>
+    <meta name="description" content="Authorization vs. clearing vs. settlement, in plain language.">
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <div class="wrap">
+            <a class="brand" href="index.html"><span class="leaf">&#127793;</span> Nischay Mohan</a>
+            <nav class="nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="projects.html">Notes</a>
+                <a href="about.html">About</a>
+                <button class="theme-toggle" data-theme-toggle type="button"
+                        aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme">
+                    <span class="icon-moon" aria-hidden="true">&#9789;</span>
+                    <span class="icon-sun" aria-hidden="true">&#9728;</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="wrap">
+            <article class="essay">
+                <h1>How money moves</h1>
+                <p class="meta">
+                    <span class="badge badge--seedling">&#127793; Seedling</span>
+                    <span>Created <time datetime="2026-06-28">28 Jun 2026</time></span>
+                    <span>Last tended <time datetime="2026-07-05">5 Jul 2026</time></span>
+                </p>
+
+                <p>Most people say "I paid" as if it were one instant event. Under the hood it's at least
+                three: <strong>authorization</strong>, <strong>clearing</strong>, and
+                <strong>settlement</strong>. They run on different clocks, and almost everything
+                interesting about payments &mdash; fraud, disputes, float, fees &mdash; lives in the gaps
+                between them.</p>
+
+                <p>Quick definitions, since the jargon does real work here:</p>
+                <ul>
+                    <li><strong>Authorization</strong> &mdash; a fast "yes/no": does this account have the
+                    funds and does it look legitimate? Money doesn't move yet; it's just earmarked.</li>
+                    <li><strong>Clearing</strong> &mdash; the parties reconcile who owes whom, netting many
+                    transactions against each other.</li>
+                    <li><strong>Settlement</strong> &mdash; the actual transfer of value between banks, so
+                    the merchant is genuinely paid.</li>
+                </ul>
+
+                <figure class="diagram" role="group" aria-labelledby="dia2-cap">
+                    <svg viewBox="0 0 340 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <defs>
+                            <filter id="hd2" x="-20%" y="-20%" width="140%" height="140%">
+                                <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="2" seed="9" result="n"/>
+                                <feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+                            </filter>
+                            <marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5"
+                                    markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                <path class="arrowhead" d="M0,0 L10,5 L0,10 z"/>
+                            </marker>
+                        </defs>
+                        <g filter="url(#hd2)">
+                            <line class="flow" x1="170" y1="66"  x2="170" y2="118" marker-end="url(#arrow2)"/>
+                            <line class="flow" x1="170" y1="172" x2="170" y2="224" marker-end="url(#arrow2)"
+                                  stroke-dasharray="6 6"/>
+                            <rect class="node" x="70" y="12"  width="200" height="54" rx="10"/>
+                            <rect class="node" x="70" y="118" width="200" height="54" rx="10"/>
+                            <rect class="node" x="70" y="224" width="200" height="54" rx="10"/>
+                        </g>
+                        <text class="label" x="170" y="36"  text-anchor="middle">Tap / swipe</text>
+                        <text class="sub"   x="170" y="54"  text-anchor="middle">the purchase</text>
+                        <text class="label" x="170" y="142" text-anchor="middle">Authorized</text>
+                        <text class="sub"   x="170" y="160" text-anchor="middle">funds held, ~2 seconds</text>
+                        <text class="label" x="170" y="248" text-anchor="middle">Settled</text>
+                        <text class="sub"   x="170" y="266" text-anchor="middle">money moves, T+1 to T+3</text>
+                        <text class="flow-label" x="178" y="98"  text-anchor="start">instant</text>
+                        <text class="flow-label" x="178" y="204" text-anchor="start">hours&ndash;days</text>
+                    </svg>
+                    <figcaption id="dia2-cap">Two clocks: the "yes" is instant; the money is slow.</figcaption>
+                </figure>
+
+                <blockquote>The float &mdash; that quiet window between "authorized" and "settled" &mdash;
+                is where a surprising amount of the payments business, and its risk, actually sits.</blockquote>
+
+                <p>This is a seedling: I'll grow it with a worked example of a single $10 coffee moving
+                through the chain, and prune the hand-waving as I go.</p>
+
+                <aside class="backlinks">
+                    <h2>Related</h2>
+                    <ul>
+                        <li><a href="projects.html">Who controls the rails?</a> &mdash; once you know how
+                        money moves, the next question is who can stop it.</li>
+                        <li><a href="index.html">The garden, front page</a></li>
+                    </ul>
+                </aside>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <p>Tended by Nischay Mohan &middot; a learn-in-public digital garden.</p>
+        </div>
+    </footer>
+
+    <script src="static/js/theme.js"></script>
+</body>
+</html>

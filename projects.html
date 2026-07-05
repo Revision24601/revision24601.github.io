@@ -3,24 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - Nischay Mohan</title>
+    <title>Notes &mdash; Nischay Mohan</title>
+    <meta name="description" content="Atomic notes and essays, growing over time.">
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
     <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
-    <div class="test-banner">Testing</div>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="projects.html">Projects</a>
-    </nav>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <main>
-        <h1>le projects</h1>
-        <img src="static/images/munich.JPG" width="250" height="250">
-        <a href="#">Link</a>
+    <header class="site-header">
+        <div class="wrap">
+            <a class="brand" href="index.html"><span class="leaf">&#127793;</span> Nischay Mohan</a>
+            <nav class="nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="projects.html" aria-current="page">Notes</a>
+                <a href="about.html">About</a>
+                <button class="theme-toggle" data-theme-toggle type="button"
+                        aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme">
+                    <span class="icon-moon" aria-hidden="true">&#9789;</span>
+                    <span class="icon-sun" aria-hidden="true">&#9728;</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="wrap">
+            <section>
+                <p class="kicker">The notes</p>
+                <h1>Everything currently growing</h1>
+                <p>Atomic notes and longer essays, newest tending first. Stubs are on purpose &mdash; a
+                title I've committed to filling in later.</p>
+
+                <ul class="card-grid">
+                    <li class="card">
+                        <h3><a href="how-money-moves.html">How money moves</a>
+                            <span class="badge badge--seedling">&#127793; Seedling</span></h3>
+                        <p>Authorization vs. clearing vs. settlement, in plain language.</p>
+                        <p class="meta">
+                            <span>Tended <time datetime="2026-07-05">5 Jul 2026</time></span>
+                        </p>
+                    </li>
+                    <li class="card">
+                        <h3>Who controls the rails?
+                            <span class="badge badge--stub">Stub</span></h3>
+                        <p>A map of the systems that clear cross-border money, and what "control" means
+                        when you can be removed from a network.</p>
+                        <p class="meta">
+                            <span>Tended <time datetime="2026-07-02">2 Jul 2026</time></span>
+                        </p>
+                    </li>
+                    <li class="card">
+                        <h3>AI as leverage over money
+                            <span class="badge badge--stub">Stub</span></h3>
+                        <p>Where models genuinely change the economics of moving and checking money.</p>
+                        <p class="meta">
+                            <span>Tended <time datetime="2026-07-03">3 Jul 2026</time></span>
+                        </p>
+                    </li>
+                </ul>
+            </section>
+        </div>
     </main>
 
-    <footer>
-        <p>© 2025 Nischay Mohan | <a href="mailto:nischaym@amazon.com">Contact Me</a></p>
+    <footer class="site-footer">
+        <div class="wrap">
+            <p>Tended by Nischay Mohan &middot; a learn-in-public digital garden.</p>
+        </div>
     </footer>
+
+    <script src="static/js/theme.js"></script>
 </body>
 </html>
