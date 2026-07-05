@@ -1,3 +1,14 @@
+/* Testing Banner */
+.test-banner {
+    background: #e60000;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
 /* General Styling */
 body {
     font-family: 'Poppins', sans-serif;
