@@ -6,7 +6,11 @@
     <atom:link href="https://revision24601.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <description>A learn-in-public garden on how payment systems work, the geopolitics of money, and AI as leverage over financial systems.</description>
     <language>en</language>
-    <lastBuildDate>Sun, 05 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 06 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <!-- Curated on purpose: this feed carries only new essays and notable notes,
+         not every trivial edit or "last tended" bump. POSSE: essays are canonical
+         at the links below and syndicated to Substack with a link back. -->
+    <docs>https://revision24601.github.io/about.html</docs>
 
     <item>
       <title>The Interchange Highway: what really happens in a card transaction</title>

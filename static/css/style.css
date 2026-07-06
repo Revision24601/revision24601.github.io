@@ -531,6 +531,88 @@ code {
 }
 .changelog .cl-body { flex: 1 1 16rem; }
 
+/* ---- Search / filter box ------------------------------------------------- */
+.search {
+    margin: 1.25rem 0 0;
+}
+.search label {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--faint);
+    margin-bottom: 0.35rem;
+}
+.search input {
+    width: 100%;
+    font: inherit;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+}
+.search input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.is-hidden { display: none !important; }
+.search-empty {
+    color: var(--muted);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    margin-top: 1rem;
+}
+
+/* ---- Travel: story-forward trip pages + galleries ------------------------ */
+.trip-lede { font-size: 1.18rem; color: var(--muted); }
+.gallery {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 0;
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+.gallery figure { margin: 0; }
+/* Clearly-marked placeholder tile — swap for a real <img> later. */
+.photo-ph {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    aspect-ratio: 4 / 3;
+    padding: 0.75rem;
+    border: 2px dashed var(--border);
+    border-radius: 10px;
+    background: var(--accent-soft);
+    color: var(--faint);
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    line-height: 1.4;
+}
+.gallery figcaption {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--faint);
+    margin-top: 0.35rem;
+}
+.gallery img { width: 100%; height: auto; border-radius: 10px; display: block; }
+
+/* ---- Interests ----------------------------------------------------------- */
+.interests { list-style: none; padding: 0; margin: 1.25rem 0 0; }
+.interests li {
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--border);
+}
+.interests .term {
+    font-family: var(--font-sans);
+    font-weight: 650;
+}
+.interests p { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.98rem; }
+
 /* Give anchored tag sections room below the sticky header */
 :target { scroll-margin-top: 5.5rem; }
 

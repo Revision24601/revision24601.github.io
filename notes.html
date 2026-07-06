@@ -46,8 +46,10 @@
             <div class="section-head">
                 <p class="kicker">Notes</p>
                 <h1>Short atomic notes</h1>
-                <p class="lede-sm">One idea per card. A flat, freeing space &mdash; no hierarchy, no
-                pressure to be finished. Browse, or traverse by <a href="tags.html">tag</a>.</p>
+                <p class="lede-sm">My commonplace book: definitions, mental models, and half-formed ideas,
+                one per card. A flat, freeing space &mdash; no hierarchy, no pressure to be finished. This is
+                me thinking out loud; some cards are deliberately just stubs. Browse, or traverse by
+                <a href="tags.html">tag</a>.</p>
             </div>
 
             <ul class="card-grid">
@@ -99,6 +101,70 @@
                         <li><a class="tag" href="tags.html#payments">Payments</a></li>
                     </ul>
                     <p class="meta"><span>Tended <time datetime="2026-07-01">1 Jul 2026</time></span></p>
+                </li>
+
+                <li class="card" id="mdr">
+                    <h3>MDR is three fees wearing one coat
+                        <span class="badge badge--seedling">&#127793; Seedling</span></h3>
+                    <p>The <strong>Merchant Discount Rate</strong> looks like a single percentage, but it's
+                    really <a href="#scheme-fees">scheme fees</a> + interchange + acquirer markup stacked
+                    together. Whenever someone quotes me "one rate", my first question is which of the three
+                    is hiding the markup. The long version is in
+                    <a href="the-interchange-highway.html">The Interchange Highway</a>.</p>
+                    <ul class="tags"><li><a class="tag" href="tags.html#payments">Payments</a></li></ul>
+                    <p class="meta"><span>Tended <time datetime="2026-07-05">5 Jul 2026</time></span></p>
+                </li>
+
+                <li class="card" id="scheme-fees">
+                    <h3>Scheme fees are the network's quiet annuity
+                        <span class="badge badge--stub">Stub</span></h3>
+                    <p>Separate from interchange, paid to the card network itself. Fractions of a cent per
+                    transaction &mdash; but multiply by every swipe on Earth. Note to self: write up how
+                    opaque these are compared to <a href="#mdr">the interchange line</a>.</p>
+                    <ul class="tags"><li><a class="tag" href="tags.html#payments">Payments</a></li></ul>
+                    <p class="meta"><span>Tended <time datetime="2026-07-05">5 Jul 2026</time></span></p>
+                </li>
+
+                <li class="card" id="sub-ledger">
+                    <h3>The sub-ledger is the source of truth nobody photographs
+                        <span class="badge badge--stub">Stub</span></h3>
+                    <p>The internal ledger that tracks who owns what, in-flight, before money settles. Boring,
+                    invisible, load-bearing. If it's wrong, everything downstream lies. (Cousin of
+                    <a href="#auth-vs-capture">auth vs. capture</a> &mdash; both are about money that's
+                    promised but not yet moved.)</p>
+                    <ul class="tags">
+                        <li><a class="tag" href="tags.html#systems">Systems &amp; Architecture</a></li>
+                        <li><a class="tag" href="tags.html#payments">Payments</a></li>
+                    </ul>
+                    <p class="meta"><span>Tended <time datetime="2026-07-05">5 Jul 2026</time></span></p>
+                </li>
+
+                <li class="card" id="merchant-of-record">
+                    <h3>Merchant of Record = who gets the angry email
+                        <span class="badge badge--stub">Stub</span></h3>
+                    <p>Half-formed, but: the MOR is whoever is legally the seller &mdash; so they own the tax,
+                    the chargebacks, and the compliance headaches. Move the MOR and you move the risk. Want
+                    to connect this to <a href="#mdr">MDR</a>, since who's the seller also shapes the fees.</p>
+                    <ul class="tags">
+                        <li><a class="tag" href="tags.html#payments">Payments</a></li>
+                        <li><a class="tag" href="tags.html#systems">Systems &amp; Architecture</a></li>
+                    </ul>
+                    <p class="meta"><span>Tended <time datetime="2026-07-05">5 Jul 2026</time></span></p>
+                </li>
+
+                <li class="card" id="auth-vs-capture">
+                    <h3>Authorization is a promise; capture is the ask
+                        <span class="badge badge--seedling">&#127793; Seedling</span></h3>
+                    <p><strong>Authorization</strong> earmarks the money ("this card is good for $20").
+                    <strong>Capture</strong> is the later step that actually requests it &mdash; which is why a
+                    hotel can hold a deposit for days and never charge it. The gap between the two is a
+                    smaller sibling of <a href="#float">the float</a>, and it explains a lot of "pending"
+                    weirdness. See also <a href="how-money-moves.html">How money moves</a>.</p>
+                    <ul class="tags">
+                        <li><a class="tag" href="tags.html#payments">Payments</a></li>
+                        <li><a class="tag" href="tags.html#systems">Systems &amp; Architecture</a></li>
+                    </ul>
+                    <p class="meta"><span>Tended <time datetime="2026-07-05">5 Jul 2026</time></span></p>
                 </li>
             </ul>
         </div>
