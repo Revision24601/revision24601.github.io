@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Interchange Highway — Nischay Mohan</title>
+    <meta name="description" content="What really happens in a card transaction: the four-party model, the fees skimmed at each hop, and where the MDR actually goes.">
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="alternate" type="application/rss+xml" title="Nischay Mohan — RSS" href="feed.xml">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <div class="wrap">
+            <a class="brand" href="index.html"><span class="leaf">&#127793;</span> Nischay Mohan</a>
+            <nav class="nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="now.html">Now</a>
+                <a href="writing.html">Writing</a>
+                <a href="notes.html">Notes</a>
+                <a href="travel.html">Travel</a>
+                <a href="contact.html">Contact</a>
+                <a href="feed.xml" class="nav-rss" title="RSS feed">RSS</a>
+                <button class="theme-toggle" data-theme-toggle type="button"
+                        aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme">
+                    <span class="icon-moon" aria-hidden="true">&#9789;</span>
+                    <span class="icon-sun" aria-hidden="true">&#9728;</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="wrap">
+            <article class="essay">
+                <p class="now-note"><a href="writing.html">Writing</a> &rarr; Season 1 &middot; Foundations</p>
+                <h1>The Interchange Highway: what really happens in a card transaction</h1>
+                <p class="meta">
+                    <span class="badge badge--evergreen">Flagship</span>
+                    <span>Created <time datetime="2026-06-20">20 Jun 2026</time></span>
+                    <span>Last tended <time datetime="2026-07-05">5 Jul 2026</time></span>
+                </p>
+                <ul class="tags">
+                    <li><a class="tag" href="tags.html#payments">Payments</a></li>
+                    <li><a class="tag" href="tags.html#systems">Systems &amp; Architecture</a></li>
+                </ul>
+
+                <p>You tap a card. A light turns green. It feels like one thing happened. In fact, four or
+                five strangers just passed a message down a chain and, days later, will pass money back up
+                it &mdash; and every one of them takes a cut on the way. This essay is the map. Once you
+                have it, most of the payments industry stops being mysterious.</p>
+
+                <p>Let me define the players first, because the jargon does real work:</p>
+                <ul>
+                    <li><strong>Cardholder</strong> &mdash; you, paying.</li>
+                    <li><strong>Merchant</strong> &mdash; the shop taking the payment.</li>
+                    <li><strong>Acquirer</strong> (often via a <strong>PSP</strong>, a payment service
+                    provider) &mdash; the merchant's bank/processor. It "acquires" the transaction on the
+                    merchant's behalf.</li>
+                    <li><strong>Card network</strong> &mdash; Visa, Mastercard, and friends. They own the
+                    rails and the rulebook; they don't hold your money.</li>
+                    <li><strong>Issuer</strong> &mdash; the bank that gave you the card and actually holds
+                    your funds.</li>
+                </ul>
+                <p>Because there are four distinct roles &mdash; cardholder's bank, merchant's bank, and a
+                network in the middle &mdash; this is called the <strong>four-party model</strong>. Hold
+                onto that phrase; it's the hinge of half my other essays.</p>
+
+                <h2>The two journeys</h2>
+                <p>A card payment is really two trips on the same highway, in opposite directions and on
+                different clocks.</p>
+
+                <figure class="diagram" role="group" aria-labelledby="dia-ih">
+                    <svg viewBox="0 0 360 540" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <defs>
+                            <filter id="hdih" x="-20%" y="-20%" width="140%" height="140%">
+                                <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="2" seed="4" result="n"/>
+                                <feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+                            </filter>
+                            <marker id="arrih" viewBox="0 0 10 10" refX="8" refY="5"
+                                    markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                <path class="arrowhead" d="M0,0 L10,5 L0,10 z"/>
+                            </marker>
+                        </defs>
+                        <g filter="url(#hdih)">
+                            <!-- data / authorization flows down the left spine -->
+                            <line class="flow" x1="104" y1="56"  x2="104" y2="116" marker-end="url(#arrih)"/>
+                            <line class="flow" x1="104" y1="164" x2="104" y2="224" marker-end="url(#arrih)"/>
+                            <line class="flow" x1="104" y1="272" x2="104" y2="332" marker-end="url(#arrih)"/>
+                            <line class="flow" x1="104" y1="380" x2="104" y2="440" marker-end="url(#arrih)"/>
+                            <!-- funds settle back up the right side, minus a fee at each hop -->
+                            <path class="flow" d="M192,464 C232,464 236,436 236,404 L236,60 C236,30 232,8 192,32"
+                                  marker-end="url(#arrih)"/>
+                            <rect class="node" x="16" y="8"   width="176" height="48" rx="10"/>
+                            <rect class="node" x="16" y="116" width="176" height="48" rx="10"/>
+                            <rect class="node" x="16" y="224" width="176" height="48" rx="10"/>
+                            <rect class="node" x="16" y="332" width="176" height="48" rx="10"/>
+                            <rect class="node" x="16" y="440" width="176" height="48" rx="10"/>
+                        </g>
+                        <text class="label" x="104" y="28"  text-anchor="middle">You</text>
+                        <text class="sub"   x="104" y="46"  text-anchor="middle">cardholder</text>
+                        <text class="label" x="104" y="136" text-anchor="middle">Merchant</text>
+                        <text class="sub"   x="104" y="154" text-anchor="middle">the shop</text>
+                        <text class="label" x="104" y="244" text-anchor="middle">Acquirer / PSP</text>
+                        <text class="sub"   x="104" y="262" text-anchor="middle">shop's bank</text>
+                        <text class="label" x="104" y="352" text-anchor="middle">Card network</text>
+                        <text class="sub"   x="104" y="370" text-anchor="middle">the rails</text>
+                        <text class="label" x="104" y="460" text-anchor="middle">Issuer</text>
+                        <text class="sub"   x="104" y="478" text-anchor="middle">your bank</text>
+
+                        <text class="flow-label" x="110" y="90" text-anchor="start">1 &middot; authorize &darr;</text>
+                        <text class="flow-label" x="214" y="18" text-anchor="start">2 &middot; settle &uarr;</text>
+                        <text class="sub" x="212" y="410" text-anchor="start">&minus; interchange</text>
+                        <text class="sub" x="212" y="300" text-anchor="start">&minus; scheme fees</text>
+                        <text class="sub" x="212" y="192" text-anchor="start">&minus; acquirer markup</text>
+                    </svg>
+                    <figcaption id="dia-ih">Down the left: the <em>authorization</em> &mdash; a data message
+                    asking "is this good?", answered in about two seconds. Up the right: <em>settlement</em>
+                    &mdash; the money, days later, with a fee skimmed at each hop. Those skims, added up, are
+                    the MDR.</figcaption>
+                </figure>
+
+                <h2>Trip one: authorization (data, seconds)</h2>
+                <p>The tap sends a message &mdash; card number, amount, merchant &mdash; from the merchant to
+                the acquirer, onto the card network, and to your issuer. The issuer checks funds and
+                fraud signals and answers <em>yes</em> or <em>no</em>. That answer races back. No money has
+                moved yet; the issuer has simply <strong>earmarked</strong> the amount. This is why a
+                pending charge can vanish: an authorization is a promise, not a transfer.</p>
+
+                <h2>Trip two: clearing and settlement (money, days)</h2>
+                <p>Later &mdash; usually end of day, in batches &mdash; the transactions are
+                <strong>cleared</strong> (everyone agrees who owes whom) and <strong>settled</strong> (the
+                money actually moves between banks). The merchant gets paid on a delay measured in days,
+                not seconds. And here's the part people miss: <strong>the merchant does not receive the
+                full amount.</strong></p>
+
+                <h2>Where the money leaks: the MDR</h2>
+                <p>The gap between what you paid and what the merchant keeps is the <strong>Merchant
+                Discount Rate (MDR)</strong> &mdash; the all-in cost of accepting the card. It's not one
+                fee; it's three, stacked:</p>
+                <ul>
+                    <li><strong>Interchange</strong> &mdash; the biggest slice, paid by the acquirer to
+                    <em>your issuer</em>. This is the fee that funds your points and cashback. Crucially,
+                    the network <em>sets</em> interchange but doesn't <em>keep</em> it.</li>
+                    <li><strong>Scheme fees</strong> &mdash; the network's own cut for running the rails.
+                    Small per transaction; vast at scale.</li>
+                    <li><strong>Acquirer markup</strong> &mdash; what the merchant's processor charges on
+                    top, for the service and the risk.</li>
+                </ul>
+
+                <h2>The opinion</h2>
+                <p>Here's my take: <strong>interchange is the load-bearing incentive of the entire card
+                system, and most public debate about "swipe fees" gets it backwards.</strong> Merchants
+                rail against the networks, but the biggest fee flows to <em>issuing banks</em> &mdash; and
+                it exists precisely to bribe those banks into handing out cards and rewards, which is what
+                drives the ubiquity merchants rely on. It's a subsidy loop hiding inside a fee. You can't
+                understand any fight about payments &mdash; regulation, rewards, or Europe wanting its own
+                rails &mdash; until you see that the interchange highway runs money one way and incentives
+                the other.</p>
+
+                <aside class="backlinks">
+                    <h2>Related</h2>
+                    <ul>
+                        <li><a href="why-amex-doesnt-fly-in-the-uk.html">Why Amex doesn't fly in the UK</a>
+                        &mdash; what happens when one company plays all four roles at once.</li>
+                        <li><a href="how-money-moves.html">How money moves</a> &mdash; the plain-language
+                        version of authorize / clear / settle.</li>
+                        <li><a href="notes.html#float">The float is where the money sleeps</a></li>
+                        <li><a href="writing.html">Back to Season 1 &middot; Foundations</a></li>
+                    </ul>
+                </aside>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <p>Canonical here &middot; syndicated to Substack. Tended by Nischay Mohan &middot;
+            <a href="changelog.html">changelog</a> &middot; <a href="feed.xml">RSS</a></p>
+        </div>
+    </footer>
+
+    <script src="static/js/theme.js"></script>
+</body>
+</html>
