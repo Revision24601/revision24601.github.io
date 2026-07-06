@@ -47,7 +47,7 @@
                 <p class="kicker">Tags</p>
                 <h1>Traverse by interest</h1>
                 <p class="lede-sm">Tags are shared across essays and notes, so you can follow a thread
-                wherever it runs. Jump to a tag:</p>
+                wherever it runs. Search below, or jump to a tag:</p>
                 <ul class="tags">
                     <li><a class="tag" href="#payments">Payments</a></li>
                     <li><a class="tag" href="#money-geopolitics">Money &amp; Geopolitics</a></li>
@@ -56,7 +56,15 @@
                     <li><a class="tag" href="#travel">Travel</a></li>
                     <li><a class="tag" href="#notes">Notes</a></li>
                 </ul>
+                <div class="search">
+                    <label for="q">Search titles</label>
+                    <input id="q" type="search" placeholder="Type to filter essays &amp; notes&hellip;"
+                           autocomplete="off" aria-controls="tag-sections">
+                </div>
+                <p class="search-empty is-hidden" id="search-empty">No matches &mdash; try a broader term.</p>
             </div>
+
+            <div id="tag-sections">
 
             <section class="series" id="payments">
                 <h2>Payments</h2>
@@ -117,6 +125,7 @@
                     <li><div class="entry-title"><a href="notes.html">Browse all notes &rarr;</a></div></li>
                 </ul>
             </section>
+            </div><!-- /#tag-sections -->
         </div>
     </main>
 
@@ -128,5 +137,6 @@
     </footer>
 
     <script src="static/js/theme.js"></script>
+    <script src="static/js/search.js"></script>
 </body>
 </html>
