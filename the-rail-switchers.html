@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Rail Switchers &mdash; Nischay Mohan</title>
+    <meta name="description" content="BRICS isn't building a joint currency. It's rewiring the payment rails underneath the dollar — bilateral fast-payment bridges, multi-CBDC ledgers, and the FX liquidity problem that decides whether it works.">
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <div class="wrap">
+            <a class="brand" href="index.html"><span class="leaf">&#127793;</span> Nischay Mohan</a>
+            <nav class="nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="projects.html">Notes</a>
+                <a href="about.html">About</a>
+                <button class="theme-toggle" data-theme-toggle type="button"
+                        aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme">
+                    <span class="icon-moon" aria-hidden="true">&#9789;</span>
+                    <span class="icon-sun" aria-hidden="true">&#9728;</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="wrap">
+            <article class="essay">
+                <h1>The Rail Switchers</h1>
+                <p class="meta">
+                    <span class="badge badge--evergreen">Evergreen</span>
+                    <span>Created <time datetime="2026-08-18">18 Aug 2026</time></span>
+                    <span>Last tended <time datetime="2026-10-08">8 Oct 2026</time></span>
+                </p>
+
+                <p>Every few months, the headlines return. Financial commentators declare that BRICS is
+                building a unified currency to dethrone the US dollar.</p>
+
+                <p>It makes for great drama. It is also fundamentally wrong.</p>
+
+                <p>Building a single monetary union across China, India, Russia, Brazil, and South
+                Africa is a macroeconomic fantasy. Their capital controls are too mismatched. Their
+                foreign policy goals diverge. Their monetary frameworks do not fit into a single
+                box.</p>
+
+                <p>The ministers and central bankers meeting in New Delhi and Moscow know this. They
+                are not trying to launch a joint fiat currency.</p>
+
+                <p>They are doing something far more practical: <strong>they are changing the underlying
+                payment rails.</strong></p>
+
+                <pre>┌─────────────────────────────────────────────────────────────────────────┐
+│                        THE DE-DOLLARIZATION PARADIGM                    │
+├──────────────────────────────────────┬──────────────────────────────────┤
+│           The Popular Myth           │       The Engineering Reality    │
+├──────────────────────────────────────┼──────────────────────────────────┤
+│ * A single joint "BRICS Coin"        │ * Bilateral Fast Payment links   │
+│ * Gold-backed centralized fiat       │ * Wholesale multi-CBDC ledgers   │
+│ * Replacing USD as a store of value  │ * Direct ISO 20022 API gateways  │
+│ * Unifying national monetary policy  │ * Bypassing USD correspondent    │
+│                                      │   banking choke points           │
+└──────────────────────────────────────┴──────────────────────────────────┘</pre>
+
+                <h2>The Manhattan detour</h2>
+
+                <p>To understand why BRICS wants to switch rails, look at how cross-border trade works
+                today.</p>
+
+                <p>Suppose a buyer in New Delhi purchases goods from a supplier in S&atilde;o Paulo.
+                The buyer holds Indian Rupees (INR). The seller wants Brazilian Real (BRL).</p>
+
+                <p>In a rational network, money would move directly from New Delhi to S&atilde;o
+                Paulo. It doesn't. Instead, the payment takes a mandatory detour through
+                Manhattan.</p>
+
+                <pre>[Buyer in India (INR)]
+       │
+ (Local Debiting)
+       ▼
+[Indian Issuing Bank]
+       │  (SWIFT Message - ISO 20022)
+       ▼
+[US Correspondent Bank (Nostro Account in USD)]
+       │  (Fedwire / CHIPS Settlement in NY)
+       ▼
+[US Clearing Bank (USD Intermediate Pair)]
+       │  (SWIFT Message)
+       ▼
+[Brazilian Correspondent Bank (Vostro Account in USD)]
+       │  (Local FX Conversion: USD -&gt; BRL)
+       ▼
+[Brazilian Acquiring Bank]
+       │  (Local Crediting)
+       ▼
+[Supplier in Brazil (BRL)]
+
+Total Latency: 24 to 72 Hours  |  Friction: Multi-tier fees, opaque FX spreads</pre>
+
+                <p>Here is the step-by-step reality of that transaction:</p>
+
+                <ul>
+                    <li><strong>The Message:</strong> The Indian bank sends an ISO 20022 message over
+                    SWIFT.</li>
+                    <li><strong>The Conversion:</strong> The Indian bank converts rupees into US dollars
+                    at a Nostro account in New York.</li>
+                    <li><strong>The Settlement:</strong> The dollars clear through Fedwire or CHIPS.</li>
+                    <li><strong>The Final Hop:</strong> The dollars land in Brazil, where a local bank
+                    converts them into Real.</li>
+                </ul>
+
+                <p>This detour takes 1 to 3 days. It charges fees at every hop. Most importantly,
+                because the money cleared through a US bank, the transaction falls under US legal
+                jurisdiction.</p>
+
+                <p>For 50 years, this was the only way to settle global trade at scale. That monopoly
+                is ending.</p>
+
+                <h2>Two engineering paths</h2>
+
+                <p>At the FIBAC 2026 conference in Mumbai, Reserve Bank of India Governor Sanjay
+                Malhotra laid out the ground truth.</p>
+
+                <p>There is no common BRICS infrastructure yet approved, and no joint currency on the
+                table. Instead, BRICS members are discussing two distinct engineering paths to connect
+                existing national systems:</p>
+
+                <ol>
+                    <li><strong>Fast Payment System (FPS) Bridges:</strong> Connecting domestic instant
+                    payment networks &mdash; like India's UPI and Brazil's Pix &mdash; via direct API
+                    gateways.</li>
+                    <li><strong>Central Bank Digital Currency (CBDC) Interoperability:</strong> Linking
+                    national CBDCs to settle sovereign trade directly on digital ledgers.</li>
+                </ol>
+
+                <p>Domestic fast payment systems have transformed local economies. India's Unified
+                Payments Interface (UPI) handles over 13 billion transactions a month. Brazil's Pix
+                dominates daily commerce across Latin America.</p>
+
+                <p>Connecting these systems does not require replacing national currencies. It requires
+                API translation and bilateral messaging protocols.</p>
+
+                <pre>[Payer App (India)]
+       │  (Scans QR / Inputs Payee ID)
+       ▼
+[NPCI / UPI Switch (India)] ────(Bilateral API Bridge)────► [Banco Central do Brasil / Pix Switch]
+       │                                                               │
+(Local Hold / Debit INR)                                      (Real-time FX Quote / Locks BRL)
+       │                                                               │
+[Indian Settlement Bank] ◄───(Pre-Funded Nostro / FX Broker)───► [Brazilian Settlement Bank]
+       │                                                               │
+       ▼                                                               ▼
+[Debit Payer Account (INR)]                                   [Credit Payee Account (BRL)]</pre>
+
+                <h2>Wholesale settlement: multi-CBDC ledgers</h2>
+
+                <p>Retail payment bridges work well for small transfers. Large-scale commodity trade
+                &mdash; oil, wheat, raw minerals &mdash; requires wholesale sovereign settlement.</p>
+
+                <p>This is where multi-CBDC platforms like <strong>Project mBridge</strong> enter the
+                picture.</p>
+
+                <p>Developed by the BIS Innovation Hub alongside central banks in China, the UAE,
+                Thailand, and Saudi Arabia, mBridge uses a dedicated, permissioned distributed
+                ledger.</p>
+
+                <pre>[Commercial Bank A (China)] ──────────────────────────────► [Commercial Bank B (UAE)]
+       │                                                            │
+       │  (1. Issue e-CNY on mBridge Ledger)                        │  (4. Redeem e-AED)
+       ▼                                                            ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                            mBridge DLT Ledger                                │
+│                                                                              │
+│  * Central Bank Nodes validate state updates.                                │
+│  * Atomic Swap Execution: Payment-versus-Payment (PvP).                      │
+│  * e-CNY directly exchanged for e-AED on-chain without USD routing.          │
+└──────────────────────────────────────────────────────────────────────────────┘</pre>
+
+                <p>Instead of keeping Nostro accounts in foreign commercial banks, participating
+                entities hold sovereign digital currencies directly on a shared ledger.</p>
+
+                <p>Settlement executes via <strong>Payment-versus-Payment (PvP) atomic swaps</strong>:</p>
+
+                <ul>
+                    <li>Bank A transfers digital Yuan (<code>e-CNY</code>).</li>
+                    <li>Bank B transfers digital Dirhams (<code>e-AED</code>).</li>
+                    <li>The smart contract executes both transfers simultaneously.</li>
+                </ul>
+
+                <p>Both legs settle at the exact same instant. There is no settlement delay, no
+                counterparty credit risk during transit, and no dollar intermediary.</p>
+
+                <h2>The three frictions of direct pairs</h2>
+
+                <p>It is easy to draw architecture diagrams. It is hard to run global liquidity
+                networks. Bypassing correspondent banks introduces three severe engineering and
+                market-structure problems:</p>
+
+                <p>It is easy to connect two servers with an API. It is much harder to trade two
+                currencies nobody wants to swap directly.</p>
+
+                <p>According to data from the Bank for International Settlements (BIS), the US dollar
+                sits on one side of roughly 89% of all foreign exchange transactions globally. It does
+                this because it acts as a <strong>vehicle currency</strong> &mdash; the universal
+                liquid buffer.</p>
+
+                <p>Think of it like a barter market.</p>
+
+                <p>Suppose a buyer in New Delhi wants to exchange Indian Rupees (<code>INR</code>)
+                directly for Brazilian Real (<code>BRL</code>).</p>
+
+                <p>In today's market, almost no commercial bank keeps massive, active order books for
+                <code>INR/BRL</code>. Finding an entity in S&atilde;o Paulo who holds Real and wants
+                Rupees at the exact second you want to trade is rare.</p>
+
+                <p>Because there is almost no organic <strong>market depth</strong> (a deep pool of
+                active buyers and sellers), attempting a direct trade exposes you to three severe
+                problems:</p>
+
+                <pre>┌─────────────────────────────────────────────────────────────────────────┐
+│                     THE THREE FRICTIONS OF DIRECT PAIRS                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│ 1. Wide Spreads: Middlemen charge higher fees to take on rare currency. │
+│ 2. Slippage: Large trades drain available supply, driving up cost        │
+│    mid-trade.                                                           │
+│ 3. Volatility Risk: Without USD as a shock absorber, exchange rates      │
+│    jump.                                                                │
+└─────────────────────────────────────────────────────────────────────────┘</pre>
+
+                <ol>
+                    <li><strong>Wide Bid-Ask Spreads:</strong> Because direct <code>INR/BRL</code>
+                    trades are rare, the market makers who facilitate them charge a massive middleman
+                    fee (a wide spread) to cover their risk.</li>
+                    <li><strong>Slippage:</strong> If an Indian importer tries to buy $10 million worth
+                    of goods directly in Real, the order will swallow the available
+                    <code>INR/BRL</code> liquidity instantly. The exchange rate will &ldquo;slip&rdquo;
+                    rapidly against the buyer midway through the transaction, making the last million
+                    far more expensive than the first.</li>
+                    <li><strong>The USD Buffer:</strong> When those same trades run through the dollar
+                    (<code>INR -&gt; USD -&gt; BRL</code>), they leverage deep global markets where
+                    trillions move daily. Competition between banks keeps the spread paper-thin.</li>
+                </ol>
+
+                <p>If BRICS wants to bypass the dollar in real-time payments, member central banks
+                cannot just build payment switches. They must become <strong>market makers of last
+                resort</strong> &mdash; holding pools of each other's currencies or funding active
+                central bank currency swaps to absorb that slippage themselves.</p>
+
+                <p>Direct payment bridges rely heavily on <strong>pre-funding</strong>. To settle
+                real-time payments between India and Brazil, an Indian bank must keep foreign currency
+                sitting idle in a Brazilian account. This traps huge amounts of capital globally.</p>
+
+                <p>CBDCs solve pre-funding via atomic swaps, but an atomic swap still requires a market
+                maker willing to hold the incoming foreign currency on its balance sheet.</p>
+
+                <p>BRICS is not a political monolith. India and Brazil operate within Western financial
+                channels and must maintain strict international anti-money laundering (AML) and FATF
+                standards. Russia operates under severe international sanctions.</p>
+
+                <p>Building a single, interconnected payment rail across nations with fundamentally
+                conflicting compliance laws creates massive technical edge cases.</p>
+
+                <blockquote><strong>Key Takeaway:</strong> The friction in global payments is no longer
+                about messaging speed &mdash; it is about foreign exchange liquidity and regulatory
+                compliance across sovereign borders.</blockquote>
+
+                <h2>Fragmentation, not disappearance</h2>
+
+                <p>The claim that the dollar will vanish overnight is false. The dollar remains the
+                primary global unit of account and store of value.</p>
+
+                <p>However, in <strong>payments infrastructure</strong>, monopoly is giving way to
+                fragmentation.</p>
+
+                <pre>[Old World: Monolithic Rail]
+Global Trade ──► SWIFT + USD Clearing Banks ──► Settlement
+
+[New World: Multi-Rail Web]
+               ┌──► Local Fast Payment Bridges (UPI / Pix)
+Global Trade ──┼──► Multi-CBDC Ledgers (mBridge)
+               ├──► Regional Networks (CIPS / RuPay)
+               └──► SWIFT / USD Clearing (Legacy High-Value)</pre>
+
+                <p>We are moving away from a single global highway toward a web of interconnected
+                regional toll roads.</p>
+
+                <p>The future belongs to <strong>payment orchestration platforms</strong> &mdash; the
+                gateways, APIs, and smart sub-ledgers that can dynamically route payments across SWIFT,
+                instant payment bridges, and CBDC networks based on cost, speed, and regulatory
+                path.</p>
+
+                <p>BRICS isn't building a new currency. They are building the switches that bypass the
+                old guards.</p>
+
+                <p><em>Originally published on <a href="https://nischaymohan.substack.com/p/the-rail-switchers">Substack</a>, 18 Aug 2026.</em></p>
+
+                <aside class="backlinks">
+                    <h2>Related</h2>
+                    <ul>
+                        <li><a href="how-money-moves.html">How money moves</a> &mdash; the domestic
+                        version of the same chain: authorization, clearing, settlement.</li>
+                        <li><a href="why-payment-reconciliation-is-harder.html">Why Payment
+                        Reconciliation Is Harder Than Fraud Detection</a> &mdash; what happens downstream,
+                        when every participant's records disagree.</li>
+                    </ul>
+                </aside>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <p>Tended by Nischay Mohan &middot; a learn-in-public digital garden.</p>
+        </div>
+    </footer>
+
+    <script src="static/js/theme.js"></script>
+</body>
+</html>

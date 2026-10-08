@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Things That Matter &mdash; Nischay Mohan</title>
+    <meta name="description" content="Why I started writing in public: bridging fintech/AI hype and the technical reality of how money actually moves.">
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <div class="wrap">
+            <a class="brand" href="index.html"><span class="leaf">&#127793;</span> Nischay Mohan</a>
+            <nav class="nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="projects.html">Notes</a>
+                <a href="about.html">About</a>
+                <button class="theme-toggle" data-theme-toggle type="button"
+                        aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme">
+                    <span class="icon-moon" aria-hidden="true">&#9789;</span>
+                    <span class="icon-sun" aria-hidden="true">&#9728;</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="wrap">
+            <article class="essay">
+                <h1>Building Things That Matter</h1>
+                <p class="meta">
+                    <span class="badge badge--evergreen">Evergreen</span>
+                    <span>Created <time datetime="2026-02-16">16 Feb 2026</time></span>
+                    <span>Last tended <time datetime="2026-10-08">8 Oct 2026</time></span>
+                </p>
+
+                <p>Beginnings are hard. So is building things that actually work at scale.</p>
+
+                <p>For years, my writing has lived in private: design docs, post-mortems, and
+                &ldquo;decision records&rdquo; meant for internal eyes only. These are the documents
+                that move millions of dollars and affect real systems. But lately, I've noticed a
+                pattern. Whether I'm looking at payment gateways, distributed systems, or the current
+                wave of AI, the same fundamental challenges keep appearing.</p>
+
+                <p>I'm starting this Substack because I want to bridge the gap between high-level
+                &ldquo;fintech/AI hype&rdquo; and the less-glamorous, sometimes ambiguous, oft
+                technical reality of how money actually moves, and how systems scale.</p>
+
+                <p>Over the last year, I've been deep in the plumbing &mdash; Payment models, Merchant
+                of Record (MOR) infrastructure, reconciliation loops, and the high-stakes world of
+                financial infrastructure. It's a space where a &ldquo;minor&rdquo; architectural choice
+                can quietly bleed revenue or destroy customer trust six months down the line.</p>
+
+                <p>I'm starting this Substack because I'm currently in the middle of that &ldquo;deep
+                dive.&rdquo; I'm connecting my decade of engineering leadership with the high-stakes
+                plumbing of global financial infrastructure models.</p>
+
+                <p>At the same time, AI is changing how we operate. It's not about the &ldquo;magic&rdquo;
+                of LLMs; it's about how we use these tools to compress the massive complexity of the
+                domains we already work in.</p>
+
+                <p>I plan to publish 1&ndash;2 times per week. Most of my writing will be free and
+                public. I'll be focusing on:</p>
+
+                <ul>
+                    <li><strong>Payments Infrastructure:</strong> Deconstructing how money actually
+                    moves.</li>
+                    <li><strong>The &ldquo;Outsider&rdquo; Perspective:</strong> Applying distributed
+                    systems logic to legacy financial plumbing, and beyond.</li>
+                    <li><strong>Applied AI:</strong> How I'm using AI to handle financial modeling and
+                    complexity of monies.</li>
+                </ul>
+
+                <p>If you are a builder, an operator, or a leader who cares about how systems
+                <em>actually</em> behave in production, you'll feel at home here.</p>
+
+                <p><em>Originally published on <a href="https://nischaymohan.substack.com/p/building-things-that-matter">Substack</a>, 16 Feb 2026 &mdash; the post that started the public writing this garden grows out of.</em></p>
+
+                <aside class="backlinks">
+                    <h2>Related</h2>
+                    <ul>
+                        <li><a href="index.html">The garden, front page</a> &mdash; where this writing
+                        lives now.</li>
+                        <li><a href="why-payment-reconciliation-is-harder.html">Why Payment
+                        Reconciliation Is Harder Than Fraud Detection</a> &mdash; the plumbing, taken
+                        seriously.</li>
+                    </ul>
+                </aside>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <p>Tended by Nischay Mohan &middot; a learn-in-public digital garden.</p>
+        </div>
+    </footer>
+
+    <script src="static/js/theme.js"></script>
+</body>
+</html>

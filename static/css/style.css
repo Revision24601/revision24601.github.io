@@ -133,6 +133,22 @@ code {
     border-radius: 4px;
 }
 
+/* Essays ported from Substack carry raster images and ASCII diagrams. */
+.essay img {
+    max-width: 100%;
+    height: auto;
+}
+
+.essay pre {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.45;
+    background: var(--surface);
+    padding: 1rem;
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
 ::selection { background: var(--accent-soft); }
 
 .skip-link {

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Payment Reconciliation Is Harder Than Fraud Detection &mdash; Nischay Mohan</title>
+    <meta name="description" content="Fraud detection is a prediction problem; reconciliation is a distributed-consistency problem with no universal ground truth.">
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <div class="wrap">
+            <a class="brand" href="index.html"><span class="leaf">&#127793;</span> Nischay Mohan</a>
+            <nav class="nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="projects.html">Notes</a>
+                <a href="about.html">About</a>
+                <button class="theme-toggle" data-theme-toggle type="button"
+                        aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme">
+                    <span class="icon-moon" aria-hidden="true">&#9789;</span>
+                    <span class="icon-sun" aria-hidden="true">&#9728;</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="wrap">
+            <article class="essay">
+                <h1>Why Payment Reconciliation Is Harder Than Fraud Detection</h1>
+                <p class="meta">
+                    <span class="badge badge--evergreen">Evergreen</span>
+                    <span>Created <time datetime="2026-09-19">19 Sep 2026</time></span>
+                    <span>Last tended <time datetime="2026-10-08">8 Oct 2026</time></span>
+                </p>
+
+                <p>Imagine two alerts landing at a payments company at 9:00 a.m. The first says a card
+                transaction has a 92% probability of being fraudulent. The second says yesterday's
+                processor settlement is $187,412.63 short of the company's internal ledger. The fraud
+                alert is urgent. The reconciliation alert is existential.</p>
+
+                <p>The fraud team can inspect a scored transaction, compare it with known patterns, ask
+                for stronger authentication, decline it, or let it through. The decision is imperfect,
+                but the problem is legible: one transaction, one decision point, a measurable trade-off
+                between false positives and false negatives, and &mdash; eventually &mdash; a label.</p>
+
+                <p>The reconciliation team has no such clean object. The apparent shortfall might be
+                real. It might be a batch that crossed midnight in another timezone. It might be a fee
+                applied after clearing, a partial capture, a refund detached from its original sale, a
+                chargeback netted without line-item detail, an FX rate that changed between
+                authorization and settlement, or an event delivered twice and processed out of order.
+                Worse, each participant may be internally consistent while disagreeing with everyone
+                else.</p>
+
+                <p><strong>My central claim is not that fraud detection is easy. It is that fraud
+                detection is structurally a prediction problem, while reconciliation is a
+                distributed-consistency problem with no universal ground truth.</strong></p>
+
+                <p>Fraud asks, &ldquo;What will happen?&rdquo; The truth arrives later in the form of a
+                dispute, a chargeback, or an analyst-confirmed outcome. Reconciliation asks, &ldquo;What
+                happened?&rdquo; The uncomfortable answer is that the truth may never have been recorded
+                in one place.</p>
+
+                <figure class="diagram">
+                    <img src="static/images/reconciliation-chain.png" alt="A card payment traversing merchant, gateway, processor, acquirer, card network, and issuer">
+                    <figcaption>A card payment does not move directly from customer to merchant &mdash;
+                    it traverses a chain, and every hop keeps its own records.</figcaption>
+                </figure>
+
+                <p>A card payment does not move directly from customer to merchant. It traverses a
+                chain: merchant, gateway, processor, acquirer, card network, issuer. The approval
+                returns along the same route, often in 2&ndash;5 seconds [1]. That speed creates a
+                powerful illusion: if the customer sees &ldquo;approved,&rdquo; <em>the payment must be
+                complete.</em></p>
+
+                <p>It is not complete.</p>
+                <ol>
+                    <li><strong>Authorization</strong> reserves funds; it does not move them.</li>
+                    <li><strong>Capture</strong> tells the system the merchant is ready to collect.</li>
+                    <li><strong>Clearing</strong> exchanges transaction detail between the acquiring and
+                    issuing sides.</li>
+                    <li>Only <strong>Settlement</strong> moves actual funds, typically 1&ndash;3 business
+                    days later in North America, though the timing varies by network, country, cut-off
+                    and liquidity arrangement [1][2].</li>
+                </ol>
+
+                <p>This separation is not an implementation footnote. It is the reason &ldquo;payment
+                status&rdquo; is not a scalar. <em>An authorization can be approved but never
+                captured.</em> A capture can be partial. Clearing can reclassify an interchange
+                category. Settlement can be delayed, netted, reversed, returned, or split. A payment
+                collected on Monday may not appear in the merchant's bank account until Wednesday
+                [3].</p>
+
+                <p><strong>Every hop also creates a record on its own cadence.</strong> A gateway
+                report may appear in real time. A processor may issue a daily batch. A card network may
+                deliver a clearing file on a different operational day. The bank statement shows the
+                final deposit, often net of fees and other adjustments. If the gateway and acquirer are
+                separate vendors (not a full-stack PSP), the merchant inherits different support
+                channels, formats, identifiers and cut-offs as an operational burden [4].</p>
+
+                <blockquote>&ldquo;An institution can have all the relevant records and still lack one
+                reliable view of the transaction.&rdquo; &mdash; Backspace Tech [5]</blockquote>
+
+                <p>There is no universal transaction key that reliably survives the full journey. The
+                merchant has an <code>OrderID</code>. The gateway has a payment <code>intent</code> or
+                <code>token</code>. The processor has its own <code>TransactionID</code>. The acquirer
+                and network introduce reference numbers. The issuer has an authorization code. Refunds,
+                disputes and adjustments may refer to the original transaction inconsistently, or not at
+                all. Even the merchant descriptor can mutate: processors prepend strings such as
+                <code>PAYPAL *</code>, <code>SQ *</code> or <code>STRIPE.SNL *</code>, so structurally
+                identical purchases can present differently depending on routing [6].</p>
+
+                <h2>The records are supposed to disagree!</h2>
+
+                <p>A useful way to understand reconciliation is that most mismatches are <em>not</em>
+                errors. They are legitimate consequences of timing, netting and representation.</p>
+
+                <p>The system's job is to distinguish expected disagreement from actual loss.</p>
+
+                <p>Order date is not capture date, and capture date is not payout date. Batches close
+                at different times. Weekends and holidays extend settlement windows. A transaction
+                booked after cut-off rolls to the next processing cycle, which is why naive &ldquo;trade
+                date + N business days&rdquo; logic fails. Authorization files show transactions
+                immediately while settlement files arrive later, creating temporary unmatched items and
+                general-ledger discrepancies. We are not even treading the territory of cross-border
+                payments, which add timezone and network-rule differences [7][8].</p>
+
+                <p>The customer sees the <em>gross amount</em>; the merchant usually receives the
+                <em>net amount</em>. The issuer sends funds through the network minus interchange, and
+                the acquirer deposits the remainder after assessment and processing fees. In Castler's
+                canonical example, a $100 sale becomes a $97.70 deposit. The $2.30 difference is an
+                expense to classify, not a missing payment [9].</p>
+
+                <p>That is the simple case. Fees can be applied at the wrong contractual rate,
+                assessments can be double-counted, and reserve deductions can be wrong. A transaction
+                may be submitted at one interchange category and later downgraded to a more expensive
+                rate after clearing. Some processors net chargebacks against settlement without
+                exposing sufficient line-item detail. For international payments, the FX rate at
+                authorization may differ from the rate at settlement [10].</p>
+
+                <p>Partial captures, partial refunds and appeasements create their own combinatorics.
+                One authorization can become multiple captures. Multiple sale lines can be covered by
+                one payout. A refund can arrive separately from the original capture, while a dispute
+                can arrive weeks later with a fee. Marketplace adjustments and manual journals further
+                separate accounting entries from the transaction that caused them [11].</p>
+
+                <figure class="diagram">
+                    <img src="static/images/reconciliation-taxonomy.png" alt="Taxonomy of reconciliation mismatches">
+                    <figcaption>Taxonomy adapted from Enterprise Times' September 2026 review of manual
+                    reconciliation [12].</figcaption>
+                </figure>
+
+                <p>These are not merely one-to-one matching problems. A robust engine must handle
+                one-to-many, many-to-one, many-to-many, net-to-net, contra and partial matching. It
+                may need to find a subset of settlement lines whose total equals one transfer even
+                when identifiers do not match [13].</p>
+
+                <p>Reconciliation becomes much harder when a company treats a payment service
+                provider's dashboard as its ledger. A PSP is an integration. The company still needs an
+                internal, double-entry, append-only record of obligations and movements. Corrections
+                should be new entries, not edits to history. Money should be represented as integers in
+                minor units, never floating-point values [14].</p>
+
+                <blockquote>
+                    <ol>
+                        <li><strong>Make every operation idempotent:</strong> Charges, refunds, payouts
+                        and webhook handlers need idempotency keys. This protects against the
+                        imperative retries on the Network, and a non-idempotent retry can double-bill a
+                        customer.</li>
+                        <li><strong>Treat webhooks as triggers (not commands):</strong> Delivery is
+                        <code>at-least-once</code> and can be <code>out-of-order</code>. On receipt,
+                        deduplicate the event and reconcile against provider state rather than assuming
+                        the event is the next valid transition.</li>
+                        <li><strong>Use sagas across external boundaries:</strong> There is no
+                        distributed <code>ACID</code> transaction spanning your database and a PSP.
+                        Reserve a pending ledger entry, call the provider with an idempotency key, then
+                        post the settled entry or a compensating reversal.</li>
+                        <li><strong>Partition where ordering matters:</strong> Strict global ordering is
+                        unnecessary and expensive; per-account or per-transaction ordering is often the
+                        unit that matters.</li>
+                        <li><strong>Prefer strong consistency on the money path:</strong> Derived views
+                        can be eventually consistent. Balances and postings cannot.</li>
+                        <li><strong>Reconcile continuously:</strong> Watermarks and buffers can absorb
+                        expected late events; unexplained drift must page both engineering and
+                        finance.</li>
+                    </ol>
+                </blockquote>
+
+                <p>Out-of-order delivery is a particularly destructive edge case. Suppose
+                payment.refunded arrives before payment.paid. A command-oriented handler rejects the
+                refund because the local payment is not yet marked paid. When the paid event later
+                arrives, the local system settles into the wrong state indefinitely. A state-based
+                reconciler instead uses the webhook as a prompt to fetch the provider's current truth
+                and converge on it. [15]</p>
+
+                <p>The design consequence is subtle: reconciliation is not a back-office report. It is
+                a production feature and an observability layer for money. In a healthy system it is
+                quiet. The week it fires, it can be the difference between a five-minute repair and a
+                regulatory incident. [16]</p>
+
+                <h2>Automation still leaves a human-shaped problem</h2>
+
+                <p>The best reconciliation systems are exception-based. Routine matches are automatic;
+                known timing breaks and rounding differences resolve within policy; humans receive only
+                genuine exceptions with reason codes, owners and deadlines. One practitioner benchmark
+                describes a well-automated operation as matching 97&ndash;99% of position records
+                automatically. [17]</p>
+
+                <p>But the remaining one to three percent is where ambiguity concentrates. &ldquo;An
+                API provides payment data, but does not standardise it,&rdquo; Enterprise Times
+                observed. Every provider must be mapped into an internal record containing the internal
+                payment ID, provider ID, end-to-end reference, direction, currency, gross and net
+                amounts, fees, FX rate, payer or recipient, rail, status, settlement time, return
+                reason and original transaction ID. [12]</p>
+
+                <ul>
+                    <li><strong>59%</strong> &mdash; Up to this share of finance resources goes to
+                    transactional, match-ready work, according to EY as cited by Optimus.</li>
+                    <li><strong>95%</strong> &mdash; Of that effort reportedly goes to items that
+                    already reconcile, rather than exceptions or analysis.</li>
+                    <li><strong>30&ndash;40%</strong> &mdash; Of finance teams' time is spent on
+                    repetitive matching and validation, according to Paystand as cited by Optimus.</li>
+                </ul>
+
+                <p>These operational figures are second-hand vendor citations. The underlying EY study
+                was not located in the research, so they should remain attributed rather than presented
+                as independent facts. [18]</p>
+
+                <p>Vendors can materially reduce this work. Modern Treasury's Reconciliation Engine,
+                for example, is described as ingesting bank and processor data across cards, ACH, wire,
+                checks, RTP and FedNow; enriching and normalizing it; matching records; and routing
+                exceptions into case management. Cointab supports complex matching patterns. Gr4vy and
+                Merge address orchestration and API normalization. [19][13]</p>
+
+                <p>What software cannot do is manufacture identifiers that were never emitted, correct
+                a provider's root-cause status conflict, or decide which team owns a break that spans
+                finance, engineering, risk and external operations. Automation shrinks the haystack.
+                It does not guarantee that the remaining needle has a single owner &mdash; or even that
+                it is a needle.</p>
+
+                <h2>Case study: Synapse / Evolve, 2024&ndash;2025</h2>
+
+                <p>The collapse of banking-as-a-service middleware provider Synapse shows what happens
+                when sub-ledgers stop being trustworthy. Synapse connected fintechs including Yotta and
+                Juno with partner banks that held customer funds in large commingled accounts. After
+                Synapse filed for bankruptcy in April 2024, court-appointed trustee Jelena McWilliams
+                reported an approximately $85 million gap: Synapse's ledgers said depositors were owed
+                about $265 million, while partner banks held about $180 million associated with the
+                accounts. [20]</p>
+
+                <ul>
+                    <li><strong>$265M</strong> &mdash; Reported end-user obligations in Synapse
+                    ledgers</li>
+                    <li><strong>$180M</strong> &mdash; Reported funds held by partner banks</li>
+                    <li><strong>100,000+</strong> &mdash; Customers locked out for months</li>
+                </ul>
+
+                <p>Evolve said Synapse failed at its &ldquo;one most critical job&rdquo;: keeping
+                accurate ledgers of individual end-user funds. Litigation alleged the banks and Synapse
+                lacked accurate ledgers and blamed one another for the inability to unwind the system.
+                The estate reportedly lacked funds for a complete outside reconciliation. In November
+                2025, the CFPB allocated $46 million to victims. [21][22]</p>
+
+                <p>The lesson is not that reconciliation software would necessarily have prevented the
+                collapse. It is that when the middleware ledger, bank ledgers and fintech ledgers
+                diverge, there may be no authoritative dataset from which to reconstruct every
+                customer's balance. The failure mode is not a bad prediction. It is the loss of
+                accounting truth.</p>
+
+                <h2>Why fraud detection is comparatively tractable</h2>
+
+                <p>Fraud detection is a binary classification problem: fraud or legitimate. The labels
+                are not instant and are sometimes noisy, but the framework is mature. Teams measure
+                precision, recall and AUC; set thresholds by comparing false-positive and
+                false-negative costs; collect analyst decisions and confirmed fraud outcomes; and
+                retrain models as the distribution changes. [23]</p>
+
+                <p>Card networks also see more of the graph than any individual merchant. Visa says
+                its Visa Account Attack Intelligence score responds in 20 milliseconds and was trained
+                on more than 15 billion VisaNet transactions, using six times the features of earlier
+                models. Visa claims an 85% reduction in false positives versus other risk models and
+                says it helped proactively block $40 billion in fraud in fiscal 2023. [24]</p>
+
+                <p>Mastercard says Decision Intelligence evaluates roughly 143 billion transactions
+                per year. Its DI Pro system uses graph techniques and generative AI across roughly one
+                trillion data points, flags compromised merchants up to 300% faster, and reduces false
+                positives by up to 200%. Those are vendor claims, but they illustrate the scale and
+                maturity of network-level risk infrastructure. [25]</p>
+
+                <p>The stack goes beyond a model score. Rules engines capture explicit policies.
+                Device fingerprinting and behavioral signals look for unusual combinations. 3-D Secure
+                2.0 can pass more than 100 data points &mdash; including device identity, geolocation
+                consistency and typing cadence &mdash; to the issuer. One study cited by PYMNTS found
+                up to a 40% reduction in card fraud while up to 95% of transactions were approved
+                instantly without extra consumer input. [26]</p>
+
+                <p>The 2026 Merchant Risk Council report found that more than 90% of merchants use at
+                least one authorization-related fraud tactic; approximately 40% use Strong Customer
+                Authentication, 31% use 3DS2, and 37% use machine learning to fine-tune fraud
+                management. [27]</p>
+
+                <p>Most importantly, the outcome feeds the system. A customer reports fraud. A dispute
+                becomes a chargeback. An analyst confirms or rejects an alert. Those labels arrive late
+                &mdash; sometimes days or weeks after the decision &mdash; but they still support
+                weekly retraining, score-distribution monitoring and false-positive-rate alerts.
+                [28]</p>
+
+                <p>Reconciliation has no equivalent universal label. An unmatched item does not tell
+                you which system is wrong. Its resolution may require a bank trace, a processor file,
+                an internal ledger replay, a contract check on fees, and a human judgment about whether
+                the remaining difference is timing, classification or loss.</p>
+
+                <h2>Where the thesis breaks down</h2>
+
+                <p>Calling fraud &ldquo;tractable&rdquo; can become glib if it erases the parts of
+                fraud that do not produce clean labels. At least four categories deserve a full
+                counterargument.</p>
+
+                <h3>Friendly fraud is invisible at authorization</h3>
+
+                <p>In first-party misuse, the cardholder, card and delivery can all be legitimate.
+                The transaction becomes &ldquo;fraud&rdquo; only when the buyer disputes it. Chargeflow
+                says friendly fraud can account for up to 75% of chargebacks in some verticals.
+                Mastercard's 2025 reporting put it at 45% of all chargebacks, while a 2026 industry
+                report cited by ChargeGuard says more than 83% of enterprise merchants saw it rising
+                and that merchants lose $4.61 for every $1 of friendly fraud. [29][30]</p>
+
+                <p>Stricter refund policy can also backfire. A case study cited by ChargeGuard found
+                that a 38% reduction in refunds was followed by a 66% increase in chargebacks, as
+                denied customers shifted to the dispute channel. [30] Transaction scoring cannot solve
+                an incentive and post-purchase behavior problem on its own.</p>
+
+                <h3>Synthetic identity fraud has no victim to label it</h3>
+
+                <p>Synthetic identities combine real identifiers &mdash; sometimes a child's Social
+                Security number &mdash; with fabricated details, build a plausible credit history for
+                one or two years, then &ldquo;bust out.&rdquo; TheStreet, citing Deloitte, reports
+                that 70% of suspected synthetic accounts display normal payment behavior before
+                collapse. Deloitte projected losses could reach $23 billion by 2030; other estimates
+                vary widely and should not be collapsed into a single number. [31][32]</p>
+
+                <p>Here, the neat feedback-loop premise fails. No real person necessarily reports the
+                fraud. Each account can look individually legitimate. Detection becomes a graph and
+                identity-consistency problem, with the label arriving only at bust-out.</p>
+
+                <h3>False declines may cost more than fraud</h3>
+
+                <p>Oxford Economics, in research commissioned by Checkout.com, estimated that
+                merchants in the United States, United Kingdom, France and Germany forfeited $50.7
+                billion in legitimate revenue in 2022 because of erroneous declines. That four-country
+                estimate exceeds the Nilson Report's $33.41 billion estimate of global card-fraud
+                losses in 2024 &mdash; figures from different years and scopes, but a bracing
+                comparison. [33]</p>
+
+                <p>PYMNTS reported in 2026 that 47% of merchants believe up to 5% of legitimate orders
+                are incorrectly declined, contributing to roughly $50 billion in lost industry
+                revenue. Card-not-present approval rates are reported around 85%, compared with about
+                97% in store, and estimates place false positives at 2&ndash;10% of declines.
+                [34][35]</p>
+
+                <p>Incentives matter: network compliance programs penalize fraud approvals, while
+                unnecessary declines do not appear as a direct loss on an issuer's balance sheet. The
+                model can optimize the metric its owner is punished for while destroying merchant
+                revenue elsewhere in the system. [33]</p>
+
+                <h3>The adversary adapts</h3>
+
+                <p>Reconciliation counterparties are messy, but they are not usually trying to defeat
+                the matching algorithm. Fraudsters are. One practitioner review estimates model
+                performance can degrade 20&ndash;40% within months without monitoring as concept,
+                feature and label drift accumulate. Generative AI makes scam scripts, deepfakes and
+                attack playbooks cheaper to produce and distribute. [36][37]</p>
+
+                <p>The partial rebuttal is that adaptation is precisely what a feedback loop is built
+                to absorb. Fraud systems can observe new outcomes, retrain and change thresholds.
+                Reconciliation systems can learn matching rules, but they cannot infer a missing
+                reference or decide which of two counterparties' ledgers is authoritative without
+                external evidence.</p>
+
+                <h2>Build for disagreement, not just success</h2>
+
+                <p>Payments teams often lavish attention on the authorization path because it is
+                visible, real time and revenue-adjacent. Reconciliation arrives later, looks
+                operational, and produces no celebratory conversion chart. That is a category
+                error.</p>
+
+                <p>The authorization path answers whether a payment should proceed. The ledger and
+                reconciliation system answer whether the company can prove where the money went. The
+                first protects a transaction. The second protects the institution.</p>
+
+                <p>That means treating reconciliation as architecture from day one: an internal
+                double-entry ledger; immutable entries and compensating reversals; integers for money;
+                idempotency at every external boundary; event deduplication; state-based convergence
+                for out-of-order webhooks; canonical provider mappings; explicit timing windows;
+                complex matching; reason-coded exceptions; and shared ownership between finance,
+                engineering and operations.</p>
+
+                <p>Fraud detection asks what will happen, and eventually receives a label.
+                Reconciliation asks what happened, after every participant wrote down a different
+                answer.</p>
+
+                <p>The mature operating model is not &ldquo;no breaks.&rdquo; It is knowing which
+                disagreements are expected, automatically resolving the ones that are explainable, and
+                escalating the small remainder while the evidence is still available. A high auto-match
+                rate is useful. A trustworthy ledger is non-negotiable.</p>
+
+                <p>Fraud will remain adversarial, costly and technically sophisticated. Friendly
+                fraud, synthetic identities and false declines all resist the simple
+                binary-classification story. But the fraud industry at least has a decision surface, a
+                vocabulary of measurable errors and a path by which outcomes improve the model.</p>
+
+                <p>Reconciliation begins where that clean story ends: after the event, across
+                organizations, with asynchronous files, mutable statuses, fragmented identifiers and
+                money that has already moved. It is not merely harder data matching. It is the
+                discipline of reconstructing truth in a system that never had one shared copy.</p>
+
+                <h2>Source notes</h2>
+
+                <p>Research completed September 20, 2026. Several sources were verified through
+                indexed extracts rather than full primary-document review; vendor claims are identified
+                in the draft.</p>
+
+                <h3>Settlement chain, timing and identifiers</h3>
+                <ol>
+                    <li>AniketBuilds, &ldquo;How Payment Gateways Actually Work&rdquo; &mdash; chain,
+                    authorization timing and distinction from settlement. <a href="https://medium.com/activated-thinker/how-payment-gateways-actually-work-end-to-end-guide-for-fintech-founders-f1a9e138c3f2">medium.com</a></li>
+                    <li>Korona POS, &ldquo;What Is a Merchant Acquirer?&rdquo; &mdash; settlement timing. <a href="https://koronapos.com/blog/what-is-a-merchant-acquirer/">koronapos.com</a></li>
+                    <li>Ecommpay, &ldquo;Understanding the Merchant Payment Settlement Process&rdquo; &mdash; batch and payout flow. <a href="https://ecommpay.com/blog/understanding-the-merchant-payment-settlement-process/">ecommpay.com</a></li>
+                    <li>Decta, &ldquo;Merchant Acquiring vs Payment Processing&rdquo; &mdash; unbundled-system overhead. <a href="https://www.decta.com/company/media/merchant-acquiring-vs-payment-processing-key-differences-explained">decta.com</a></li>
+                    <li>Backspace Tech, &ldquo;Making Sense of Mismatched Payments&rdquo; &mdash; fragmented records, identifiers and ownership. <a href="https://backspace-tech.medium.com/making-sense-of-mismatched-payments-e9ac7223c2a6">medium.com</a></li>
+                    <li>Tapix by Dateio, &ldquo;Merchant Name Inconsistency in Transaction Data&rdquo; &mdash; descriptor variability. <a href="https://medium.com/@Tapix/merchant-name-inconsistency-in-transaction-data-why-it-happens-and-how-to-fix-it-fbbceb929e9f">medium.com</a></li>
+                    <li>Backspace Tech, &ldquo;The Settlement Timeline Factor, Part 2&rdquo; &mdash; interim mismatches, GL effects and cross-border timing. <a href="https://backspace-tech.medium.com/the-settlement-timeline-factor-part-2-edbb9670a03e">medium.com</a></li>
+                    <li>spectastic, settlement-window reference &mdash; cut-off logic. <a href="https://github.com/spectastic/spectastic/blob/HEAD/knowledge/finance-settlement/references/001-settlement-windows.md">github.com</a></li>
+                    <li>Castler, &ldquo;What Is Payment Reconciliation?&rdquo; &mdash; net-versus-gross example and mismatch causes. <a href="https://castler.com/learning-hub/what-is-payment-reconciliation-a-guide-for-growing-businesses">castler.com</a></li>
+                    <li>Ajit Kumar, &ldquo;Settlement Mechanics Deep Dive&rdquo; &mdash; fee errors, downgrades, chargebacks and FX. <a href="https://medium.com/@ajitkumar1405879/settlement-mechanics-deep-dive-what-actually-happens-between-authorisation-and-funds-in-your-dd01b9262ac4">medium.com</a></li>
+                    <li>TopSource Global, e-commerce reconciliation guide &mdash; seven common mismatch buckets. <a href="https://medium.com/@TopSource.Global/bank-reconciliation-for-e-commerce-netsuite-shopify-amazon-fb8b8da5810f">medium.com</a></li>
+                    <li>Enterprise Times, &ldquo;Why Payment Reconciliation Remains Manual&rdquo; &mdash; canonical record design and exception taxonomy. <a href="https://www.enterprisetimes.co.uk/2026/09/11/why-payment-reconciliation-remains-manual-even-in-highly-automated-finance-teams/">enterprisetimes.co.uk</a></li>
+                    <li>Cointab, cross-border reconciliation guide &mdash; complex matching patterns. <a href="https://cointab.net/business/interbank-cross-border-transaction-reconciliation-ensuring-accuracy-in-global-banking">cointab.net</a></li>
+                </ol>
+
+                <h3>Ledger design, operations and Synapse</h3>
+                <ol start="14">
+                    <li>ravenclaude, fintech payments engineering reference &mdash; minor units, double entry, idempotency and webhook controls. <a href="https://github.com/mcorbett51090/ravenclaude/blob/HEAD/plugins/fintech-payments-engineering/CLAUDE.md">github.com</a></li>
+                    <li>Mauricio Morinelli, &ldquo;Payments Foundations&rdquo; and abhicse24, event-driven ledgers &mdash; out-of-order events and state-based reconciliation. <a href="https://medium.com/@mauriciomorinelli/payments-foundations-concurrency-state-and-the-transition-gateway-b6f16d7ff675">medium.com</a>, <a href="https://medium.com/@abhicse24/how-fintechs-keep-money-truthful-event-driven-ledgers-99d10e52a1f0">medium.com</a></li>
+                    <li>abhicse24, &ldquo;How Fintechs Keep Money Truthful&rdquo; &mdash; reconciliation as a feature. <a href="https://medium.com/@abhicse24/how-fintechs-keep-money-truthful-event-driven-ledgers-99d10e52a1f0">medium.com</a></li>
+                    <li>learn-skills.dev, reconciliation operations reference &mdash; exception processing and 97&ndash;99% auto-match benchmark. <a href="https://github.com/neversight/learn-skills.dev/blob/HEAD/data/skills-md/joellewis/finance_skills/reconciliation/SKILL.md">github.com</a></li>
+                    <li>Optimus, &ldquo;Payment Reconciliation at Scale&rdquo; &mdash; vendor-cited staffing and automation figures. <a href="https://optimus.tech/blog/payment-reconciliation-at-scale-why-82-finance-teams-spend-more-time-matching-than-managing-cash">optimus.tech</a></li>
+                    <li>Finextra, Modern Treasury Reconciliation Engine announcement &mdash; product capabilities and supported rails. <a href="https://www.finextra.com/pressarticle/96474/modern-treasury-unveils-reconciliation-engine">finextra.com</a></li>
+                    <li>Boston Brand Media, Synapse bankruptcy shortfall report. <a href="https://www.bostonbrandmedia.com/news/synapse-bankruptcy-trustee-reports-85m-missing-in-fintech-collapse">bostonbrandmedia.com</a>, <a href="https://www.finextra.com/newsarticle/45143/synapse-fallout-partner-banks-face-lawsuit">finextra.com</a></li>
+                    <li>Mint, &ldquo;The Bank Behind the Fintech Revolution Stumbles&rdquo; &mdash; Evolve statement and customer impact. <a href="https://origin-pre-prod.livemint.com:443/companies/news/the-bank-behind-the-fintech-revolution-stumbles-after-customer-funds-go-missing-11735126696340.html">livemint.com</a></li>
+                    <li>Fintech Business Weekly, CFPB victim allocation. <a href="https://fintechbusinessweekly.substack.com/p/cfpb-allocates-46-million-to-synapseevolve">substack.com</a></li>
+                </ol>
+
+                <h3>Fraud infrastructure and feedback loops</h3>
+                <ol start="23">
+                    <li>Journal of Risk and Financial Management, 2026 fraud-detection paper &mdash; classification metrics, thresholds and feedback. <a href="https://mdpi-res.com/d_attachment/jrfm/jrfm-19-00332/article_deploy/jrfm-19-00332.pdf?version=1777800861">mdpi-res.com</a></li>
+                    <li>Visa, VAAI Score announcement &mdash; 20ms, training scale, false-positive and blocked-fraud claims. <a href="https://usa.visa.com/about-visa/newsroom/press-releases.releaseId.20661.html">visa.com</a></li>
+                    <li>Mastercard, Decision Intelligence &mdash; transaction and data-point scale; vendor performance claims. <a href="https://www.mastercard.com/us/en/business/cybersecurity-fraud-prevention/risk-decisioning/decision-intelligence.html">mastercard.com</a></li>
+                    <li>PYMNTS, 3-D Secure 2.0 review &mdash; signals, friction and fraud-reduction claims. <a href="https://www.pymnts.com/fraud-prevention/2022/pymnts-intelligence-how-3d-secure-2-0-can-help-merchants-banks-and-issuers-put-a-stop-to-card-fraud/">pymnts.com</a></li>
+                    <li>Merchant Risk Council, 2026 Global eCommerce Payments &amp; Fraud Report &mdash; tactic adoption. <a href="https://info.merchantriskcouncil.org/hubfs/Documents/Report%20PDFs/Global%20Fraud%20and%20Payments%20(Reports)/2026-global-ecommerce-payments-fraud-report.pdf">merchantriskcouncil.org</a></li>
+                    <li>Elvis Bui, &ldquo;Design Fraud Detection System&rdquo; &mdash; delayed labels, retraining and drift monitoring. <a href="https://medium.com/@elvisbui/design-fraud-detection-system-c1aa346b6c99">medium.com</a></li>
+                </ol>
+
+                <h3>Counterarguments</h3>
+                <ol start="29">
+                    <li>Chargeflow, friendly-fraud guide &mdash; prevalence and cost estimates. <a href="https://www.chargeflow.io/chargebacks-101/friendly-fraud">chargeflow.io</a>, <a href="https://www.riskified.com/learning/chargebacks/chargeback-fraud/">riskified.com</a></li>
+                    <li>ChargeGuard, 2026 first-party fraud review &mdash; merchant trend, cost and refund-policy case study. <a href="https://www.trychargeguard.com/blog/first-party-fraud-shift-2026-chargeback-defense">trychargeguard.com</a></li>
+                    <li>TheStreet, synthetic identity fraud review &mdash; mechanics and normal-payment-pattern estimate. <a href="https://www.thestreet.com/personal-finance/scary-frankenstein-fraud-is-a-growing-financial-crime-analysts-say">thestreet.com</a></li>
+                    <li>DEV Community, synthetic identity fraud overview &mdash; Deloitte and Federal Reserve loss estimates. <a href="https://dev.to/tiamatenity/synthetic-identity-fraud-the-5b-shadow-economy-you-cant-see-jpk">dev.to</a></li>
+                    <li>Pulse FinTech, &ldquo;The False Decline Tax&rdquo; &mdash; Oxford Economics estimate and incentive asymmetry. <a href="https://www.pulse.bot/fintech/blogs/the-false-decline-tax-fe73cd9c-62c4-42ff-8218-981227623bf6/">pulse.bot</a></li>
+                    <li>PYMNTS, 2026 false-decline survey. <a href="https://www.pymnts.com/fraud-prevention/2026/47-percent-of-merchants-say-false-declines-cost-them-sales/">pymnts.com</a></li>
+                    <li>PaymentWeek, false-positive estimates. <a href="https://paymentweek.com/2026-6-8-the-revenue-leak-every-retail-executive-is-ignoring/">paymentweek.com</a>, <a href="https://www.globalbankingandfinance.com/can-network-tokenization-limit-false-declines">globalbankingandfinance.com</a></li>
+                    <li>Aspire Softserv, model-decay review. <a href="https://dev.to/aspire-softserv/the-real-reason-fraud-detection-models-break-in-production-and-how-to-fix-it-11ge">dev.to</a></li>
+                    <li>Global AI Scam Landscape 2026 &mdash; generative-AI attack adaptation. <a href="https://github.com/rsrini7/learnings/blob/HEAD/News/Weekly-Updates/Global_AI_Scam_Landscape_2026.md">github.com</a></li>
+                </ol>
+
+                <p><em>Originally published on <a href="https://nischaymohan.substack.com/p/why-payment-reconciliation-is-harder">Substack</a>, 19 Sep 2026.</em></p>
+
+                <aside class="backlinks">
+                    <h2>Related</h2>
+                    <ul>
+                        <li><a href="how-money-moves.html">How money moves</a> &mdash; the authorization /
+                        clearing / settlement basics this essay builds on.</li>
+                        <li><a href="the-rail-switchers.html">The Rail Switchers</a> &mdash; what happens
+                        when whole countries decide to route around the incumbent rails.</li>
+                    </ul>
+                </aside>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <p>Tended by Nischay Mohan &middot; a learn-in-public digital garden.</p>
+        </div>
+    </footer>
+
+    <script src="static/js/theme.js"></script>
+</body>
+</html>
