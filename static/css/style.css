@@ -149,6 +149,26 @@ code {
     overflow-x: auto;
 }
 
+/* Scorecards: e.g. the BRICS 2.0 retrospective's claim-by-claim grades. */
+.essay table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.25rem 0;
+    font-size: 0.92rem;
+}
+
+.essay th,
+.essay td {
+    border: 1px solid var(--border);
+    padding: 0.45rem 0.6rem;
+    text-align: left;
+    vertical-align: top;
+}
+
+.essay thead th {
+    background: var(--surface);
+}
+
 ::selection { background: var(--accent-soft); }
 
 .skip-link {
